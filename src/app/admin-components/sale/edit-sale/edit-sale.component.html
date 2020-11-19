@@ -1,0 +1,63 @@
+<div class="card card-list container my-5" *ngIf="sale">
+    <!-- Section detail Sale -->
+    <div class="card-header white d-flex justify-content-between align-items-center py-3">
+        <p class="h5-responsive font-weight-bold mb-0">Editar Ventas</p>
+        <ul class="list-unstyled d-flex align-items-center mb-0">
+            <li><i class="far fa-window-minimize fa-sm pl-3"></i></li>
+            <li><i class="fas fa-times fa-sm pl-3"></i></li>
+        </ul>
+    </div>
+
+    <div class="card-body" *ngIf="sale">
+        <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Fecha</th>
+                <th scope="col">Comprador</th>
+                <th scope="col">Whatsapp</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Envio</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row"><a class="text-primary">{{sale.date}}</a></th>
+                <td>{{sale.nameClient}}</td>
+                <td>{{sale.phoneClient}}</td>
+                <td>{{sale.emailClient}}</td>
+                <td>
+                    <span *ngIf="sale.shipping == 'domicilio'">A domicilio</span>
+                    <span *ngIf="sale.shipping == 'retiro-personal'">Retira por local</span>
+                </td>
+                <td>{{sale.status}}</td>                            
+                <td>$ {{sale.total}}</td>                
+            </tr>            
+        </tbody>
+        </table>
+    </div>
+    <!-- Section detail Sale -->
+
+    <div class="mx-1 mb-3">
+        <form action="#!" #saleForm="ngForm" (ngSubmit)="onSubmit(saleForm)">
+            <p for="">Estado del pedido: </p>
+            <select name="" id="" class="custom-select" name="status" #status="ngModel" [(ngModel)]="sale.status">
+                <option value="proceso">Proceso</option>
+                <option value="preparado">Preparado</option>
+                <option value="despachado">En camino</option>
+                <option value="entregado">¡Entregado!</option>
+            </select>
+    
+            <!-- SUBMIT -->
+            <div class="">
+                <button type="submit" class="btn btn-primary mx-auto my-3 py-3 z-depth-1 rounded btn-rounded col-12" [disabled]="!saleForm.form.valid">Finalizar compra
+                <i class="fas fa-angle-right right"></i>
+                </button>
+            </div>
+            <!-- SUBMIT -->
+        </form>
+        
+    </div>
+
+</div>

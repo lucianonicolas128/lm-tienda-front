@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "lm-tienda"
+    }
+  },
+  "defaultProject": "lm-tienda",
+  "cli": {
+    "analytics": "35fdd193-27ce-48eb-b895-5be7c0a7b1e4"
+  }
 }

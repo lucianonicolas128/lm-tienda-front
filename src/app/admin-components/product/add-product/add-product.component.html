@@ -1,0 +1,113 @@
+<div class="container" *ngIf="product">
+
+    <div class="alert alert-success" *ngIf="status == 'succes'">
+        El producto se ha agregado correctamente.
+    </div>
+    <div class="alert alert-danger" *ngIf="status == 'failed'">
+        El producto no se ha podido agregar.
+    </div>
+    <div class="alert alert-warning text-center" *ngIf="status == 'loading'">
+        <div class="spinner-border text-primary text-center" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Default form subscription -->
+    <form class="text-center p-2" action="#!" #productForm="ngForm" (ngSubmit)="onSubmit(productForm)">
+        <p>
+            <label for="image">Imagen del proyecto</label> <br>
+            <span class="image" *ngIf="product.image" style="float: none;">
+                <img src="{{product.image}}" *ngIf="product.image" alt="" style="width: 100px;">
+            </span> <br>
+            <input type="file" name="image" placeholder="Subir Imagen" (change)="fileChangeEvent($event)" id="" />
+        </p>
+
+        <!-- Name & category -->
+        <div class="row my-5">
+            
+            <!-- Name -->
+            <div class="col-md-6 col-12 text-left">
+                <h6>Nombre del producto</h6>
+                <input type="text" id="defaultSubscriptionFormPassword" class="form-control" placeholder="" name="name"
+                    #name="ngModel" [(ngModel)]="product.name" required>
+            </div>
+
+            <!-- Category -->
+            <div class="col-md-6 col-12 text-left">
+                <h6>Selecciona una categoria</h6>
+                <div class="row">
+                    <select class="form-control col-11 browser-default custom-select " type="spinner" name="category"
+                        #category="ngModel" [(ngModel)]="product.category" required>
+                        <option value="-- Añadir categoría --">-- Añadir categoría --</option>
+                        <option value="{{category.name}}" name="category" id="name" *ngFor="let category of categories">
+                            {{category.name}}
+                        </option>
+                    </select>
+                    <i class="fas fa-sync col-1 pt-2 my-auto" (click)="updateCategories()"></i>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Add category -->
+        <span *ngIf="product.category == '-- Añadir categoría --'" class="col mb-5">
+            <app-add-category></app-add-category>
+        </span>
+
+        <!-- Description -->
+        <textarea type="text" id="defaultSubscriptionFormEmail" class="form-control mb-5" placeholder="Descripcion"
+            name="description" #description="ngModel" [(ngModel)]="product.description"></textarea>
+
+        <!-- Talles & stock -->
+        <!-- <p>Selecciona los talles de tu tabla de talles</p>
+        <div class="form-row mb-5 mx-3">
+            <div class="row text-center">
+                <div *ngFor="let talle of tallesAll" class="mx-2 px-1">
+                    <a class="badge badge-info" (click)="addTalleCheck(talle.talleName)">{{talle.talleName}}</a>
+                </div>
+            </div>
+        </div> -->
+        <!-- Mostramos los talles que yá seleccionamos -->
+        <!-- <div class="mb-5 mx-3 text-center">
+            <h5 class="h5">Talles seleccionados</h5>
+            <div class="row">
+                <div *ngFor="let talle of tallesArray" class="mx-2 px-1">
+                    <a class="badge badge-gray" (click)="removeTalle(talle)">{{talle}}</a>
+                </div>
+            </div>
+
+        </div> -->
+
+        <!-- Cost & Price -->
+        <div class="form-row mb-5">
+
+            <div class="col text-left">
+                <!-- Cost -->
+                <label>Costo $ </label>
+                <input type="number" id="defaultRegisterFormFirstName" class="form-control" placeholder="$00"
+                    name="cost" #cost="ngModel" [(ngModel)]="product.cost">
+            </div>
+
+            <div class="col text-left">
+                <!-- Price -->
+                <label>Precio $ </label>
+                <input type="number" id="defaultRegisterFormLastName" class="form-control" placeholder="$00"
+                    name="price" #price="ngModel" [(ngModel)]="product.price">
+            </div>
+
+            <div class="col text-left">
+                <!-- Offer -->
+                <label>El producto está de oferta?</label>
+                <input type="number" id="defaultRegisterFormLastName" class="form-control"
+                    placeholder="Dejar vacio si NO lo está" name="offer" #offer="ngModel" [(ngModel)]="product.offer">
+            </div>
+        </div>
+
+        <!-- Sign in button -->
+        <button class="btn btn-info btn-block" type="submit" [disabled]="!productForm.form.valid">Cargar
+            producto</button>
+
+    </form>
+    <!-- Default form subscription -->
+
+</div>

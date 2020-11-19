@@ -1,0 +1,85 @@
+<!-- Section: Block Content -->
+<section class="my-2 product-box mx-0">
+
+    <div class="row">
+        <div class="col-12 col-md-6 mb-3">
+            <div class="card card-list">
+                <div class="card-header white d-flex justify-content-between align-items-center py-3">
+                    <p class="h5-responsive font-weight-bold mb-0">Lista de productos</p>
+                    <ul class="list-unstyled d-flex align-items-center mb-0">
+                        <li><i class="far fa-window-minimize fa-sm pl-3"></i></li>
+                        <li><i class="fas fa-times fa-sm pl-3"></i></li>
+                    </ul>
+                </div>
+
+                <div class="card-body scrollspy-example scrollbar-success">
+                    <div *ngFor="let product of products" class="mr-2">
+                        <div class="row py-0">
+                            <div class="col-6 align-baseline">
+                                <p class="mx-2">{{product.name}}</p>
+                            </div>
+                            <div class="col-3 text-right">
+                                <h6 class="mx-2">$ {{product.price}}</h6>
+                                <!-- <p class="mx-2 grey-text mt-0">$300</p> -->
+                            </div>
+                            <div class="row col ml-2 align-baseline text-right">
+                                <i class="fas fa-edit" [routerLink]="['edit-product', product._id]"></i>
+                                <i class="fas fa-trash-alt ml-1" (click)="deleteProduct(product._id)"></i>
+                            </div>
+                        </div>
+
+                        <span class="row py-0 ml-2">
+                            <p class="mx-1" *ngFor="let talles of product.stockTalles">
+                                <span class="">
+                                    <a class="badge badge-info">{{talles}}</a>
+                                </span>
+                            </p>
+                        </span>
+                        <div class="separator py-0">
+                            <hr>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-footer white py-3 d-flex justify-content-between">
+                    <button data-toggle="modal" data-target="#newProductModal"
+                        class="btn btn-primary btn-md px-3 my-0 mr-0"><i class="fas fa-plus mr-2"></i> Nuevo
+                        producto</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-12">
+            <app-categories></app-categories>
+        </div>
+    </div>
+
+</section>
+<!-- Section: Block Content -->
+
+<!-- New product Modal -->
+<div class="modal fade" id="newProductModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+
+    <!-- Change class .modal-sm to change the size of the modal -->
+    <div class="modal-dialog modal-xl" role="document">
+
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title w-100" id="myModalLabel">Nuevo producto</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="ngOnInit()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-addd-product></app-addd-product>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary btn-sm">Save changes</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Central Modal Small -->

@@ -1,1 +1,55 @@
 /* You can add global styles to this file, and also import other style files */
+
+.bg-primary {
+    background-color: #2f9ca0!important;
+}
+
+.bg-secondary {
+    background-color: #df3b9b!important;
+}
+
+.bg-dark {
+    background-color: #292929!important;
+}
+
+.text-primary {
+    color: #2f9ca0!important;
+}
+
+.text-secondary {
+    color: #df3b9b!important;
+}
+
+.img-wrap img {
+    width: 100%;
+}
+
+.card-product-grid:hover {
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
+    -webkit-transform: scale(1.1, 1.1);
+    transform: scale(1.1, 1.1);
+    transition: box-shadow 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card-product-grid::after {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.badge-primary {
+    background-color: #2f9ca0!important;
+}
+
+.badge-secondary {
+    background-color: #df3b9b!important;
+}
+
+.btn-primary {
+    background-color: #2f9ca0!important;
+}
+
+.logo{
+    width: 100%;
+}

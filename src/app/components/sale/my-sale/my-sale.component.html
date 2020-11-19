@@ -1,0 +1,140 @@
+<app-header></app-header>
+<div class="card card-list container my-5" *ngIf="sale">
+    <!-- Section detail Sale -->
+    <div class="card-header white d-flex justify-content-between align-items-center py-3">
+        <p class="h5-responsive font-weight-bold mb-0">¡Gracias por comprar <span
+                class="text-primary">{{sale.nameClient}}</span>!</p>
+        <ul class="list-unstyled d-flex align-items-center mb-0">
+            <li><i class="far fa-window-minimize fa-sm pl-3"></i></li>
+            <li><i class="fas fa-times fa-sm pl-3"></i></li>
+        </ul>
+    </div>
+
+    <div class="card-body" *ngIf="sale">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Envio</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row"><a class="text-primary">{{sale.date}}</a></th>
+                    <td>
+                        <span *ngIf="sale.shipping == 'domicilio'">A domicilio</span>
+                        <span *ngIf="sale.shipping == 'retiro-personal'">Retira por local</span>
+                    </td>
+                    <td>
+                        <span *ngIf="sale.status == 'proceso'" class="badge badge-danger">
+                            En proceso
+                        </span>
+                        <span *ngIf="sale.status == 'preparado'" class="badge badge-warning">
+                            Preparado
+                        </span>
+                        <span *ngIf="sale.status == 'despachado'" class="badge badge-info">
+                            En camino
+                        </span>
+                        <span *ngIf="sale.status == 'entregado'" class="badge badge-success">
+                            Entregado
+                        </span>
+                    </td>
+                    <td>$ {{sale.total}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Section detail Sale -->
+
+    <!-- <div class="row mt-3 pt-3">
+        <div class="m-3">
+            <i class="fas fa-hard-hat"></i>
+            <h4>En proceso</h4>
+            <p>Estamos preparando tu pedido!</p>
+        </div>
+    </div> -->
+
+    <!--Section: Content-->
+    <section class="text-center mt-3 pt-3 mb-3 pb-3">
+
+
+        <!--Grid row-->
+        <div class="row">
+
+            <!--Grid column-->
+            <div class="col-lg col-md-6 mb-4 ">
+                <div class="text-black-50" *ngIf="sale.status != 'proceso'">
+                    <i class="fas fa-hard-hat proceso"></i>
+                    <p class="mb-1 mt-2 font-weight-bold">En proceso</p>
+                </div>
+
+                <div class="text-danger" *ngIf="sale.status == 'proceso'">
+                    <i class="fas fa-hard-hat proceso"></i>
+                    <p class="mb-1 mt-2 font-weight-bold">En proceso</p>
+                    <p class="mb-1">Estamos preparando tu pedido!</p>
+                </div>
+            </div>
+
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-lg col-md-6 mb-4">
+                <div class="text-black-50" *ngIf="sale.status != 'preparado'">
+                    <i class="fas fa-box proceso"></i>
+                    <p class="mb-1 mt-2 font-weight-bold">Preparado</p>
+                </div>
+
+                <div class="text-warning" *ngIf="sale.status == 'preparado'">
+                    <i class="fas fa-box proceso"></i>
+                    <p class="mb-1 mt-2 font-weight-bold">Preparado</p>
+                    <p class="mb-1" *ngIf="sale.shipping == 'domicilio'">Tu pedido ya está preparado. Dentro de poco
+                        tiempo tu compra estará en camino.</p>
+                    <p class="mb-1" *ngIf="sale.shipping == 'retiro-personal'">Tu pedido ya está preparado. <br> ¡Podes
+                        pasar a retirar tu compra!</p>
+                </div>
+
+
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-lg col-md-6 mb-4" *ngIf="sale.shipping == 'domicilio'">
+                <div class="text-black-50" *ngIf="sale.status != 'despachado'">
+                    <i class="fas fa-truck proceso"></i>
+                    <p class="mb-1 mt-2 font-weight-bold">En camino</p>
+                </div>
+                <div class="text-primary" *ngIf="sale.status == 'despachado'">
+                    <i class="fas fa-truck proceso"></i>
+                    <p class="mb-1 mt-2 font-weight-bold">En camino</p>
+                    <p class="mb-1">¡Tu pedido ya está en camino! Muy pronto lo estarás recibiendo.</p>
+                </div>
+
+
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-lg col-md-6 mb-4">
+                <div class="text-black-50" *ngIf="sale.status != 'entregado'">
+                    <i class="fas fa-smile-wink proceso"></i>
+                    <p class="mb-1 mt-2 font-weight-bold">¡Entregado!</p>
+                </div>
+                <div class="text-success" *ngIf="sale.status == 'entregado'">
+                    <i class="fas fa-smile-wink proceso"></i>
+                    <p class="mb-1 mt-2 font-weight-bold">¡Entregado!</p>
+                    <p class="mb-1">Tu pedido ha sido entregado. ¡Gracias por elegirnos!</p>
+                </div>
+            </div>
+            <!--Grid column-->
+
+
+        </div>
+        <!--Grid row-->
+
+
+    </section>
+    <!--Section: Content-->
+
+</div>

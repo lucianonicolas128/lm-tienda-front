@@ -1,0 +1,83 @@
+<section class="section-content mt-5">
+    <div class="container">
+
+        <header class="section-heading text-center my-5">
+            <h2 class="section-title">Nuestros productos</h2>
+        </header><!-- sect-heading -->
+
+        <!-- Filters -->
+        <div class="text-center mb-3">
+            <div class="pl-2 form-inline">
+                <div class="form-check pl-0">
+                    <input type="radio" class="form-check-input" id="materialGroupExample1" name="groupOfMaterialRadios"
+                        value="all" (click)="updateFilter('all')">
+                    <label class="form-check-label" for="materialGroupExample1">Todo</label>
+                </div>
+
+                <div class="form-check pl-3" *ngFor="let category of categories">
+                    <input type="radio" class="form-check-input" id="materialGroupExample2" name="groupOfMaterialRadios"
+                        value="category.name" (click)="updateFilter(category.name)">
+                    <label class="form-check-label">{{category.name}}</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products -->
+        <div class="row" *ngIf="filter != 'all'">
+
+            <div class="col-md-3" *ngFor="let product of productsFiltered">
+                <div href="#" class="card card-product-grid text-center p-3 my-2"
+                    [routerLink]="['/detail-product', product._id]">
+                    <a class="img-wrap mb-3"> <img class="img-fluid" src="{{product.image}}" *ngIf="product.image"> </a>
+                    <figcaption class="info-wrap">
+                        <h6 class="">{{product.name}}</h6>
+                        <span class="badge badge-pill badge-primary m-1">En Stock</span>
+                        <span class="badge badge-pill badge-secondary m-1" *ngIf="product.offer">¡OFERTA!</span>
+                        <div class="price h5 mt-1">
+                            <span *ngIf="product.offer">
+                                <small class="mr-1"><s>${{product.price}}</s></small>
+                                <strong>${{product.offer}}</strong>
+                            </span>
+
+                            <span *ngIf="!product.offer">
+                                <strong>${{product.price}}</strong>
+                            </span>
+                            <!-- ${{product.price}} -->
+                        </div>
+
+                    </figcaption>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row" *ngIf="filter == 'all'">
+
+            <div class="col-md-3" *ngFor="let product of products">
+                <div href="#" class="card card-product-grid text-center p-3 my-2"
+                    [routerLink]="['/detail-product', product._id]">
+                    <a class="img-wrap mb-3"> <img class="img-fluid" src="{{product.image}}" *ngIf="product.image"> </a>
+                    <figcaption class="info-wrap">
+                        <h6 class="">{{product.name}}</h6>
+                        <span class="badge badge-pill badge-primary m-1">En Stock</span>
+                        <span class="badge badge-pill badge-secondary m-1" *ngIf="product.offer">¡OFERTA!</span>
+                        <div class="price h5 mt-1">
+                            <span *ngIf="product.offer">
+                                <small class="mr-1"><s>${{product.price}}</s></small>
+                                <strong>${{product.offer}}</strong>
+                            </span>
+
+                            <span *ngIf="!product.offer">
+                                <strong>${{product.price}}</strong>
+                            </span>
+                            <!-- ${{product.price}} -->
+                        </div>
+
+                    </figcaption>
+                </div>
+            </div>
+
+        </div>
+
+    </div> <!-- container .//  -->
+</section>
