@@ -47,29 +47,33 @@ export class AddCategoryComponent implements OnInit {
 
   onSubmit(form) {
     this.category.image = this.imageUrl;
+    this.status = 'loading';
 
     //Save the data
     this._categoryService.saveCategory(this.category).subscribe(
       response => {
         if (response.category) {
-
-          this._uploadService.makeFileRequest(Global.url + "image-upload/" + response.category._id, [], this.filesToUpload, 'image')
-          .then((result:any) => {
+          if (this.filesToUpload) {
+            this._uploadService.makeFileRequest(Global.url + "image-upload/" + response.category._id, [], this.filesToUpload, 'image')
+              .then((result: any) => {
+                this.status = 'succes';
+                console.log(result);
+                this.save_category = result.category;
+                // location.reload();
+                form.reset();
+              });
+          } else {
+            this.save_category = response.category;
             this.status = 'succes';
-            console.log(result);
-            this.save_category = result.category;
-            // location.reload();
             form.reset();
-
-          });
-        }
-        else{
+          }
+        } else {
           this.status = 'failed';
         }
-        },
-        error => {
-          console.log(<any>error);
-        }
+      },
+      error => {
+        console.log(<any>error);
+      }
     );
 
   }

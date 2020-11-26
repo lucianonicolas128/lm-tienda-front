@@ -109,8 +109,9 @@ export class CartComponent implements OnInit {
 
   removeItemToCart(id){
     localStorage.removeItem(id);
-    /* this.ngOnInit(); */
+    // this.ngOnInit();
     location.reload();
+    
   }
   
   onSubmit(form){

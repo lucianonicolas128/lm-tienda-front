@@ -11,7 +11,7 @@
                         <li><i class="fas fa-times fa-sm pl-3"></i></li>
                     </ul>
                 </div>
-                <div class="card-body">
+                <div class="card-body ">
                     <table class="table">
                     <thead>
                         <tr>
@@ -25,7 +25,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let sale of sales">
+                        <tr class="scrollspy-example" *ngFor="let sale of sales">
                             <th scope="row"><a class="text-primary">{{sale.date}}</a></th>
                             <td>{{sale.nameClient}}</td>
                             <td>{{sale.phoneClient}}</td>

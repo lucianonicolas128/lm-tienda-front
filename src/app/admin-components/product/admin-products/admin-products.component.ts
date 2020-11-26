@@ -4,28 +4,35 @@ import { ProductService } from '../../../services/product.service';
 import { Global } from '../../../services/global';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { StockTalles } from '../../../models/stockTalles'
+import { CategoryService } from 'src/app/services/category.service';
+import { Category } from 'src/app/models/category';
 
 @Component({
   selector: 'app-admin-products',
   templateUrl: './admin-products.component.html',
   styleUrls: ['./admin-products.component.css'],
-  providers: [ProductService]
+  providers: [ProductService, CategoryService]
 })
 
 export class AdminProductsComponent implements OnInit {
   public products: Product[];
   public url: string;
   public product: Product;
+  public categories: Category[];
+  public category: Category;
+  public productsFiltered: Product[];
 
   public tallesAndStock;
   public talle;
   public stock;
   public prueba = new Array();
+  public filter: string = 'all';
 
   public stockTalles: StockTalles;
 
   constructor(
     private _productService: ProductService,
+    private _categoryService: CategoryService,
     private _router: Router,
     private _route: ActivatedRoute
   ) {
@@ -34,6 +41,10 @@ export class AdminProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProducts();
+    this.getCategories();
+    this.filter = 'all';
+    // this.productsFiltered = this.products.slice();
+    this.updateFilter(this.filter);
   }
 
   getProducts() {
@@ -54,6 +65,30 @@ export class AdminProductsComponent implements OnInit {
       }
     )
   }
+
+  getCategories(){
+    this._categoryService.getCategories().subscribe(
+      response => {
+        if(response.categories){
+          this.categories = response.categories;
+        }
+      },
+      error => {
+        console.log(<any>error);
+      }
+    )
+  }
+
+  updateFilter(filter){
+    this.filter = filter;
+    if(this.filter != 'all'){
+      this.productsFiltered = this.products.filter( product => product.category == this.filter);    
+    } else{
+      this.productsFiltered = this.products;
+    }
+    
+  }
+
 
   filterProductsForCategory() {
 

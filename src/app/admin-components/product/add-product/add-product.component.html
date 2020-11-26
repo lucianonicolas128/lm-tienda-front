@@ -14,48 +14,55 @@
 
     <!-- Default form subscription -->
     <form class="text-center p-2" action="#!" #productForm="ngForm" (ngSubmit)="onSubmit(productForm)">
-        <p>
-            <label for="image">Imagen del proyecto</label> <br>
-            <span class="image" *ngIf="product.image" style="float: none;">
-                <img src="{{product.image}}" *ngIf="product.image" alt="" style="width: 100px;">
-            </span> <br>
-            <input type="file" name="image" placeholder="Subir Imagen" (change)="fileChangeEvent($event)" id="" />
-        </p>
 
+        <div class="card p-3">
+            <p>
+                <label for="image">Imagen del proyecto</label> <br>
+                <span class="image" *ngIf="product.image" style="float: none;">
+                    <img src="{{product.image}}" *ngIf="product.image" alt="" style="width: 100px;">
+                </span> <br>
+                <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image"
+                    placeholder="Subir Imagen" (change)="fileChangeEvent($event)" />
+            </p>
+    
+            <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="" name="imageAlt"
+                #imageAlt="ngModel" [(ngModel)]="product.imageAlt">
+            <label class="text-small" for="">Coloque aquí un texto para describir la imagen. Esto ayuda al posicionamiento
+                en las busquedas en Google</label>    
+        </div>
+        
         <!-- Name & category -->
-        <div class="row my-5">
-            
+        <div class="row my-4">
+
             <!-- Name -->
-            <div class="col-md-6 col-12 text-left">
-                <h6>Nombre del producto</h6>
+            <div class="col-md-6 col-12 text-left my-1">
+                <label>Nombre del producto</label>
                 <input type="text" id="defaultSubscriptionFormPassword" class="form-control" placeholder="" name="name"
                     #name="ngModel" [(ngModel)]="product.name" required>
             </div>
 
             <!-- Category -->
-            <div class="col-md-6 col-12 text-left">
-                <h6>Selecciona una categoria</h6>
-                <div class="row">
-                    <select class="form-control col-11 browser-default custom-select " type="spinner" name="category"
-                        #category="ngModel" [(ngModel)]="product.category" required>
-                        <option value="-- Añadir categoría --">-- Añadir categoría --</option>
-                        <option value="{{category.name}}" name="category" id="name" *ngFor="let category of categories">
-                            {{category.name}}
-                        </option>
-                    </select>
-                    <i class="fas fa-sync col-1 pt-2 my-auto" (click)="updateCategories()"></i>
-                </div>
+            <div class="col-md-6 col-12 text-left mx-auto my-1">
+                <label>Selecciona una categoria</label>
+                <select class="form-control col-md-11 col-10 browser-default custom-select " type="spinner"
+                    name="category" #category="ngModel" [(ngModel)]="product.category" required>
+                    <option value="-- Añadir categoría --">-- Añadir categoría --</option>
+                    <option value="{{category.name}}" name="category" id="name" *ngFor="let category of categories">
+                        {{category.name}}
+                    </option>
+                </select>
+                <i class="fas fa-sync col-md-1 col-2  mx-auto" (click)="updateCategories()"></i>
             </div>
 
         </div>
 
         <!-- Add category -->
-        <span *ngIf="product.category == '-- Añadir categoría --'" class="col mb-5">
+        <span *ngIf="product.category == '-- Añadir categoría --'" class="col my-4">
             <app-add-category></app-add-category>
         </span>
 
         <!-- Description -->
-        <textarea type="text" id="defaultSubscriptionFormEmail" class="form-control mb-5" placeholder="Descripcion"
+        <textarea type="text" id="defaultSubscriptionFormEmail" class="form-control my-4" placeholder="Descripcion"
             name="description" #description="ngModel" [(ngModel)]="product.description"></textarea>
 
         <!-- Talles & stock -->
@@ -79,28 +86,38 @@
         </div> -->
 
         <!-- Cost & Price -->
-        <div class="form-row mb-5">
+        <div class="card my-4">
+            <div class="row px-3">
 
-            <div class="col text-left">
-                <!-- Cost -->
-                <label>Costo $ </label>
-                <input type="number" id="defaultRegisterFormFirstName" class="form-control" placeholder="$00"
-                    name="cost" #cost="ngModel" [(ngModel)]="product.cost">
+                <div class="col-sm-12 col-md-4 my-1 p-2 text-left">
+                    <!-- Cost -->
+                    <label>Costo $ </label>
+                    <input type="number" id="defaultRegisterFormFirstName" class="form-control" placeholder="$00"
+                        name="cost" #cost="ngModel" [(ngModel)]="product.cost">
+                </div>
+
+                <div class="col-sm-12 col-md-4 my-1 p-2 text-left">
+                    <!-- Price -->
+                    <label>Precio $ </label>
+                    <input type="number" id="defaultRegisterFormLastName" class="form-control" placeholder="$00"
+                        name="price" #price="ngModel" [(ngModel)]="product.price">
+                </div>
+
+                <div class="col-sm-12 col-md-4 my-1 p-2 text-left">
+                    <!-- Offer -->
+                    <label>El producto está de oferta?</label>
+                    <input type="number" id="defaultRegisterFormLastName" class="form-control"
+                        placeholder="Dejar vacio si NO lo está" name="offer" #offer="ngModel"
+                        [(ngModel)]="product.offer">
+                </div>
             </div>
 
-            <div class="col text-left">
-                <!-- Price -->
-                <label>Precio $ </label>
-                <input type="number" id="defaultRegisterFormLastName" class="form-control" placeholder="$00"
-                    name="price" #price="ngModel" [(ngModel)]="product.price">
-            </div>
+        </div>
 
-            <div class="col text-left">
-                <!-- Offer -->
-                <label>El producto está de oferta?</label>
-                <input type="number" id="defaultRegisterFormLastName" class="form-control"
-                    placeholder="Dejar vacio si NO lo está" name="offer" #offer="ngModel" [(ngModel)]="product.offer">
-            </div>
+        <div class="custom-control custom-checkbox my-4">
+            <input type="checkbox" class="custom-control-input" id="customCheck1" name="featured" #featured="ngModel"
+                [(ngModel)]="product.featured">
+            <label class="custom-control-label" for="customCheck1">Marcar este producto como destacado</label>
         </div>
 
         <!-- Sign in button -->

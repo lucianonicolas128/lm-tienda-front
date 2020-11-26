@@ -26,16 +26,19 @@ export class ProductsComponent implements OnInit {
   public categorySelected;
 
   public filter: string = 'all';
-  
+
   public stockTalles: StockTalles;
   public tallesAndStock;
+  public status;
+
+  public statusAddCart: string;
 
   constructor(
     private _productService: ProductService,
     private _categoryService: CategoryService,
     private _router: Router,
     private _route: ActivatedRoute
-  ) { 
+  ) {
     this.url = Global.url;
     this.confirm = false;
   }
@@ -49,10 +52,10 @@ export class ProductsComponent implements OnInit {
     this.updateFilter(this.filter);
   }
 
-  getCategories(){
+  getCategories() {
     this._categoryService.getCategories().subscribe(
       response => {
-        if(response.categories){
+        if (response.categories) {
           this.categories = response.categories;
         }
       },
@@ -62,17 +65,17 @@ export class ProductsComponent implements OnInit {
     )
   }
 
-  getProducts(){
+  getProducts() {
     this._productService.getProducts().subscribe(
       response => {
-        if(response.products){
-          this.products = response.products;          
-          this.products.forEach(product => {            
+        if (response.products) {
+          this.products = response.products;
+          this.products.forEach(product => {
             this.tallesAndStock = JSON.parse(product.stockTalles);
             product.stockTalles = JSON.parse(product.stockTalles);
-            if(product.stockTalles != ''){
+            if (product.stockTalles != '') {
               product.stock = 1;
-            }            
+            }
           })
         }
       },
@@ -82,14 +85,42 @@ export class ProductsComponent implements OnInit {
     )
   }
 
-  updateFilter(filter){
+  updateFilter(filter) {
     this.filter = filter;
-    if(this.filter != 'all'){
-      this.productsFiltered = this.products.filter( product => product.category == this.filter);    
-    } else{
+    if (this.filter != 'all') {
+      this.productsFiltered = this.products.filter(product => product.category == this.filter);
+    } else {
       this.productsFiltered = this.products;
     }
-    
+
+  }
+
+  productsOffer(){
+    this.productsFiltered = this.products.filter(product => product.offer != 0);
+  }
+
+  addToCart(id) {
+
+    localStorage.setItem(id, JSON.stringify(id));
+
+    this.statusAddCart = 'succes';
+    this.status = 'success';
+    setTimeout(function () {
+      this.status = "failed";
+    }, 20);
+
+    this.ngOnInit();
+
+    let modalToast = document.getElementById('modalToast');
+    modalToast.classList.remove('invisible');
+    modalToast.classList.add('visible');
+  }
+
+  closeToast(){
+    let modalToast = document.getElementById('modalToast');
+    modalToast.classList.remove('visible');
+    modalToast.classList.add('invisible');
+
   }
 
 }

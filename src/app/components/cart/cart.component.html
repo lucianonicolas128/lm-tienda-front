@@ -12,14 +12,11 @@
   <!-- TOAST -->
 
   <div class="row my-4">
-
     <div class="col-md-7 col-sm-12 py-3">
       <div class="card card-list">
-
         <div class="card-header white d-flex justify-content-between align-items-center py-3">
           <p class="h5-responsive font-weight-bold mb-0">Tu carrito</p>
         </div>
-
         <div class="card-body mb-5">
           <table class="table">
             <thead>
@@ -58,11 +55,9 @@
             </tbody>
           </table>
         </div>
-
         <div class="card-footer white py-3 d-flex justify-content-between">
           <p class="h4 mt-2">Total ${{totalSell}}</p>
         </div>
-
       </div>
     </div>
 
@@ -80,6 +75,9 @@
             <label for="firstName" class="">Nombre</label>
             <input type="text" id="firstName" class="form-control" name="nameClient" #nameClient="ngModel"
               [(ngModel)]="sale.nameClient" required>
+            <span class="form_error text-small text-danger" *ngIf="nameClient.touched && !nameClient.valid">
+              El nombre es obligatorio
+            </span>
           </div>
           <!-- NOMBRE -->
 
@@ -88,15 +86,21 @@
             <label for="lastName" class="">Telefono</label>
             <input type="number" id="lastName" class="form-control" name="phoneClient" #phoneClient="ngModel"
               [(ngModel)]="sale.phoneClient" required>
+            <span class="form_error text-small text-danger" *ngIf="phoneClient.touched && !phoneClient.valid">
+              El telefono es obligatorio
+            </span>
           </div>
           <!-- TELEFONO -->
 
         </div>
 
         <!-- E-MAIL -->
-        <label for="email" class="">Email (optional)</label>
+        <label for="email" class="">Email</label>
         <input type="text" id="email" class="form-control mb-4" placeholder="youremail@example.com" name="emailClient"
           #emailClient="ngModel" [(ngModel)]="sale.emailClient" required>
+        <span class="form_error text-small text-danger" *ngIf="emailClient.touched && !emailClient.valid">
+          El mail es obligatorio
+        </span>
         <!-- E-MAIL -->
 
 
@@ -124,8 +128,8 @@
           <!-- ENVIO A DOMICILIO -->
           <div class="custom-control custom-radio">
 
-            <input value="home" type="radio" id="customRadio2" name="customRadio" class="custom-control-input"
-              value="domicilio" name="shipping" #shipping="ngModel" [(ngModel)]="sale.shipping" required>
+            <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="domicilio"
+              name="shipping" #shipping="ngModel" [(ngModel)]="sale.shipping" required>
 
             <label class="custom-control-label" for="customRadio2">
               Envío a domicilio
@@ -133,34 +137,43 @@
 
             <br>
           </div>
-          <span class="mt-3">
+          <span class="mt-3" *ngIf="sale.shipping == 'domicilio'">
+            <div class="visible">
 
-            <!-- DIRECCION -->
-            <label for="firstName" class="mt-3">Dirección</label>
-            <input type="text" id="firstName" class="form-control" name="address" #address="ngModel"
-              [(ngModel)]="sale.address">
-            <!-- DIRECCION -->
+              <!-- DIRECCION -->
+              <label for="firstName" class="mt-3">Dirección</label>
+              <input type="text" id="firstName" class="form-control" name="address" #address="ngModel"
+                [(ngModel)]="sale.address" required>
+              <span class="form_error text-small text-danger" *ngIf="address.touched && !address.valid">
+                La dirección es obligatoria
+              </span>
 
-            <div class="row mt-2">
+              <div class="row mt-2">
+                <!-- CIUDAD -->
+                <div class="col-md-6 mb-4">
+                  <label for="firstName" class="">Ciudad</label>
+                  <input type="text" id="firstName" class="form-control" name="city" #city="ngModel"
+                    [(ngModel)]="sale.city" required>
+                  <span class="form_error text-small text-danger" *ngIf="city.touched && !city.valid">
+                    La Ciudad es obligatoria
+                  </span>
+                </div>
 
-              <!-- CIUDAD -->
-              <div class="col-md-6 mb-4">
-                <label for="firstName" class="">Ciudad</label>
-                <input type="text" id="firstName" class="form-control" name="city" #city="ngModel"
-                  [(ngModel)]="sale.city">
+                <!-- CIUDAD -->
+                <!-- PROVINCIA -->
+                <div class="col-md-6 mb-2">
+                  <label for="lastName" class="">Provincia</label>
+                  <input type="text" id="lastName" class="form-control" value="Entre Rios" name="state" #state="ngModel"
+                    [(ngModel)]="sale.state" required>
+                  <span class="form_error text-small text-danger" *ngIf="state.touched && !state.valid">
+                    La Provincia es obligatoria
+                  </span>
+                </div>
+                <!-- PROVINCIA -->
               </div>
-              <!-- CIUDAD -->
 
-              <!-- PROVINCIA -->
-              <div class="col-md-6 mb-2">
-                <label for="lastName" class="">Provincia</label>
-                <input type="text" id="lastName" class="form-control" value="Entre Rios" name="state" #state="ngModel"
-                  [(ngModel)]="sale.state">
-              </div>
-              <!-- PROVINCIA -->
-
+              <!-- DIRECCION -->
             </div>
-            <!-- DIRECCION -->
 
           </span>
           <!-- ENVIO A DOMICILIO -->
@@ -174,23 +187,42 @@
         <hr>
 
         <div class="d-block my-3">
-          <div class="custom-control custom-radio mb-2">
+          <div *ngIf="sale.shipping == 'retiro-personal'" class="visible custom-control custom-radio mb-2">
             <input type="radio" id="customRadio3" name="customRadio2" class="custom-control-input" value="efectivo"
               name="pay" #pay="ngModel" [(ngModel)]="sale.pay" checked required>
             <label class="custom-control-label" for="customRadio3">Efectivo al retirar</label>
+            <p class="text-info text-small" *ngIf="sale.pay == 'efectivo'">
+              Una vez el producto esté preparado, podrás acercarte al negocio para abonar tu compra.
+            </p>
           </div>
+
           <div class="custom-control custom-radio mb-2">
             <input type="radio" id="customRadio4" name="customRadio2" class="custom-control-input" value="transferencia"
               name="pay" #pay="ngModel" [(ngModel)]="sale.pay" required>
             <label class="custom-control-label" for="customRadio4">Transferencia</label>
+            <p class="text-info text-small" *ngIf="sale.pay == 'transferencia'">
+              Una vez finalices tu compra, te aparecera el nombre de la cuenta y el CBU para abonar.
+            </p>
           </div>
+
           <div class="custom-control custom-radio">
             <input type="radio" id="customRadio5" name="customRadio2" class="custom-control-input" value="linkpagos"
               name="pay" #pay="ngModel" [(ngModel)]="sale.pay" required>
-            <label class="custom-control-label" for="customRadio5">Link pagos</label>
+            <label class="custom-control-label" for="customRadio5">Tarjeta en cuotas</label>
+            <p class="text-info text-small" *ngIf="sale.pay == 'linkpagos'">
+              Una vez finalices tu compra, te enviaremos al mail un link pagos para que puedas pagar con la tarjeta que
+              prefieras!.
+            </p>
           </div>
         </div>
         <!-- Pago -->
+
+        <div class="d-block my-3">
+          <p class="text-black-50 text-small">Al hacer click en Finalizar compra, aceptas nuestros <a
+              href="/terminos-condiciones" target="_blank">términos y condiciones.</a> Los datos completados en este
+            formulario son solo utilizados
+            para contactarnos luego de la compra. Uba vez finalizado el proceso de compra, son desestimados.</p>
+        </div>
 
         <!-- SUBMIT -->
         <div class="">

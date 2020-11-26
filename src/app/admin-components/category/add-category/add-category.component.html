@@ -7,6 +7,11 @@
     <div class="alert alert-danger" *ngIf="status == 'failed'">
         La categoria no se ha podido agregar.
     </div>
+    <div class="alert alert-warning text-center" *ngIf="status == 'loading'">
+        <div class="spinner-border text-primary text-center" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
 
     <!-- Default form subscription -->
     <form class="text-center p-5" action="#!" #categoryForm="ngForm" (ngSubmit)="onSubmit(categoryForm)">

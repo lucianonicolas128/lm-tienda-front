@@ -1,83 +1,132 @@
+<!-- <app-header></app-header> -->
+
+
+
 <section class="section-content mt-5">
     <div class="container">
 
+        <!-- TOAST -->
+        <div id="modalToast" class="modal fade show sticky-top toast mt-5" *ngIf="status == 'success'">
+            <div class="" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="mr-auto">Mensaje</strong>
+                    <small>1 mins ago</small>
+                    <button (click)="closeToast()" type="button" class="ml-2 mb-1 close" data-dismiss="toast"
+                        aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    Producto agregado al carrito!
+                    <a [routerLink]="['/cart']">Puedes verlo aquí.</a>
+                </div>
+            </div>
+
+        </div>
+        <!-- TOAST -->
+
         <header class="section-heading text-center my-5">
             <h2 class="section-title">Nuestros productos</h2>
+            <h6 class="text-black-50 text-muted">Productos personalizados para regalar o regalarte</h6>
         </header><!-- sect-heading -->
 
-        <!-- Filters -->
-        <div class="text-center mb-3">
-            <div class="pl-2 form-inline">
-                <div class="form-check pl-0">
-                    <input type="radio" class="form-check-input" id="materialGroupExample1" name="groupOfMaterialRadios"
-                        value="all" (click)="updateFilter('all')">
-                    <label class="form-check-label" for="materialGroupExample1">Todo</label>
-                </div>
-
-                <div class="form-check pl-3" *ngFor="let category of categories">
-                    <input type="radio" class="form-check-input" id="materialGroupExample2" name="groupOfMaterialRadios"
-                        value="category.name" (click)="updateFilter(category.name)">
-                    <label class="form-check-label">{{category.name}}</label>
-                </div>
-            </div>
-        </div>
-
-        <!-- Products -->
-        <div class="row" *ngIf="filter != 'all'">
-
-            <div class="col-md-3" *ngFor="let product of productsFiltered">
-                <div href="#" class="card card-product-grid text-center p-3 my-2"
-                    [routerLink]="['/detail-product', product._id]">
-                    <a class="img-wrap mb-3"> <img class="img-fluid" src="{{product.image}}" *ngIf="product.image"> </a>
-                    <figcaption class="info-wrap">
-                        <h6 class="">{{product.name}}</h6>
-                        <span class="badge badge-pill badge-primary m-1">En Stock</span>
-                        <span class="badge badge-pill badge-secondary m-1" *ngIf="product.offer">¡OFERTA!</span>
-                        <div class="price h5 mt-1">
-                            <span *ngIf="product.offer">
-                                <small class="mr-1"><s>${{product.price}}</s></small>
-                                <strong>${{product.offer}}</strong>
-                            </span>
-
-                            <span *ngIf="!product.offer">
-                                <strong>${{product.price}}</strong>
-                            </span>
-                            <!-- ${{product.price}} -->
+        <div class="row mx-auto px-0 mx-0">
+            <!-- Filters -->
+            <div class="col-md-3 mt-2 mx-auto">
+                <div class="card">
+                    <div class="text-left mb-3">
+                        <div class="p-4">
+                            <h5 class="mt-2">Categorias</h5>
+                            <hr>
+                            <div class="form-check pl-3">
+                                <input type="radio" class="form-check-input" id="materialGroupExample1"
+                                    name="groupOfMaterialRadios" value="all" (click)="updateFilter('all')">
+                                <label class="form-check-label" for="materialGroupExample1">Todo</label>
+                            </div>
+                            <!-- <div class="form-check pl-3">
+                                <input type="radio" class="form-check-input" id="materialGroupExample3"
+                                    name="groupOfMaterialRadios" value="all" (click)="productsOffer()">
+                                <label class="form-check-label badge badge-primary" for="materialGroupExample1">Ofertas</label>
+                            </div> -->
+                            <div class="form-check pl-3" *ngFor="let category of categories">
+                                <input type="radio" class="form-check-input" id="materialGroupExample2"
+                                    name="groupOfMaterialRadios" value="category.name"
+                                    (click)="updateFilter(category.name)">
+                                <label class="form-check-label">{{category.name}}</label>
+                            </div>
                         </div>
-
-                    </figcaption>
+                    </div>
                 </div>
             </div>
 
-        </div>
+            <!-- Products -->
+            <div class="row" *ngIf="filter != 'all'">
+                <div class="col-sm-12 col-md-4 mx-auto" *ngFor="let product of productsFiltered">
+                    <div href="#" class="card card-product-grid text-center my-2"
+                        [routerLink]="['/detail-product', product._id]">
+                        <a class="img-wrap mb-3"> <img class="img-fluid" src="{{product.image}}" *ngIf="product.image">
+                        </a>
+                        <figcaption class="info-wrap">
+                            <h6 class="">{{product.name}}</h6>
+                            <span class="badge badge-pill badge-primary m-1">En Stock</span>
+                            <span class="badge badge-pill badge-secondary m-1" *ngIf="product.offer">¡OFERTA!</span>
+                            <div class="price h5 mt-1">
+                                <span *ngIf="product.offer">
+                                    <small class="mr-1"><s>${{product.price}}</s></small>
+                                    <strong>${{product.offer}}</strong>
+                                </span>
 
-        <div class="row" *ngIf="filter == 'all'">
-
-            <div class="col-md-3" *ngFor="let product of products">
-                <div href="#" class="card card-product-grid text-center p-3 my-2"
-                    [routerLink]="['/detail-product', product._id]">
-                    <a class="img-wrap mb-3"> <img class="img-fluid" src="{{product.image}}" *ngIf="product.image"> </a>
-                    <figcaption class="info-wrap">
-                        <h6 class="">{{product.name}}</h6>
-                        <span class="badge badge-pill badge-primary m-1">En Stock</span>
-                        <span class="badge badge-pill badge-secondary m-1" *ngIf="product.offer">¡OFERTA!</span>
-                        <div class="price h5 mt-1">
-                            <span *ngIf="product.offer">
-                                <small class="mr-1"><s>${{product.price}}</s></small>
-                                <strong>${{product.offer}}</strong>
-                            </span>
-
-                            <span *ngIf="!product.offer">
-                                <strong>${{product.price}}</strong>
-                            </span>
-                            <!-- ${{product.price}} -->
-                        </div>
-
-                    </figcaption>
+                                <span *ngIf="!product.offer">
+                                    <strong>${{product.price}}</strong>
+                                </span>
+                                <!-- ${{product.price}} -->
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm btn-block"
+                                [routerLink]="['/detail-product', product._id]">
+                                <i class="far fa-eye"></i>
+                                Detalle
+                            </button>
+                            <button class="btn btn-secondary btn-sm btn-block">
+                                <i class="fas fa-cart-plus"></i>
+                                Agregar
+                            </button>
+                        </figcaption>
+                    </div>
                 </div>
             </div>
+            <div class="row col-12 col-md-9 px-0 mx-0 mx-auto" *ngIf="filter == 'all'">
+                <div class="col-md-4" *ngFor="let product of products">
+                    <div href="#" class="card card-product-grid text-center p-3 my-2">
+                        <a class="img-wrap mb-3"> <img class="img-fluid" src="{{product.image}}" *ngIf="product.image">
+                        </a>
+                        <figcaption class="info-wrap">
+                            <h6 class="">{{product.name}}</h6>
+                            <span class="badge badge-pill badge-primary m-1">En Stock</span>
+                            <span class="badge badge-pill badge-secondary m-1" *ngIf="product.offer">¡OFERTA!</span>
+                            <div class="price h5 mt-1">
+                                <span *ngIf="product.offer">
+                                    <small class="mr-1"><s>${{product.price}}</s></small>
+                                    <strong>${{product.offer}}</strong>
+                                </span>
 
+                                <span *ngIf="!product.offer">
+                                    <strong>${{product.price}}</strong>
+                                </span>
+                                <!-- ${{product.price}} -->
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm btn-block"
+                                [routerLink]="['/detail-product', product._id]">
+                                <i class="far fa-eye"></i>
+                                Detalle
+                            </button>
+                            <button class="btn btn-secondary btn-sm btn-block" (click)="addToCart(product._id)">
+                                <i class="fas fa-cart-plus"></i>
+                                Agregar
+                            </button>
+                        </figcaption>
+                    </div>
+                </div>
+            </div>
         </div>
-
     </div> <!-- container .//  -->
 </section>

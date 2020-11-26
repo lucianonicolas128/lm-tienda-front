@@ -12,7 +12,12 @@ export class HeaderComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.cartElements();
+  }
+
+  cartElements(){
     this.cart = localStorage.length;
+    // this.ngOnInit();
   }
 
 }

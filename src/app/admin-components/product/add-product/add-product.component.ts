@@ -43,7 +43,7 @@ export class AddProductComponent implements OnInit {
     private http: HttpClient
   ) {
     this.title = "Nuevo producto";
-    this.product = new Product('', '', '', '', null, null, null, null, '', null);
+    this.product = new Product('', '', '', '', null, null, null, null, '', '', null, false);
     this.url = Global.url;
   }
 

@@ -4,6 +4,10 @@
     background-color: #2f9ca0!important;
 }
 
+.bg-primary-light{
+    background-color: #bbfff4!important;
+}
+
 .bg-secondary {
     background-color: #df3b9b!important;
 }
@@ -26,8 +30,8 @@
 
 .card-product-grid:hover {
     box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
-    -webkit-transform: scale(1.1, 1.1);
-    transform: scale(1.1, 1.1);
+    -webkit-transform: scale(1.05, 1.05);
+    transform: scale(1.05, 1.05);
     transition: box-shadow 0.3s ease-in-out;
     transition: transform 0.3s ease-in-out;
 }
@@ -52,4 +56,39 @@
 
 .logo{
     width: 100%;
+}
+
+.scrollspy-example {
+    position: relative;
+    height: 600px;
+    
+    overflow: auto;
+  }
+  
+
+.btn-outline-primary {
+    color: #df3b9b!important;
+    border-color: #8d165b!important;
+}
+
+.btn-outline-primary:hover {
+    color: rgb(255, 255, 255)!important;
+    background-color:  #df3b9b!important;
+    border-color:  #941760!important;
+}
+
+.btn-secondary {
+    color: #fff;
+    background-color: #2f9ca0!important;
+    border-color: #2f9ca0!important;
+}
+
+.btn-secondary:hover {
+    color: rgb(255, 255, 255)!important;
+    background-color:  #106669!important;
+    border-color:  #106669!important;
+}
+
+.text-small {
+    font-size: 0.75rem;
 }

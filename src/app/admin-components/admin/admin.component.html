@@ -55,9 +55,19 @@
 
             <div class="tab-content" id="v-pills-tabContent">
                 <!-- PANEL DE PRODUCTOS -->
-                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                <div class="tab-pane fade show active text-center" id="v-pills-home" role="tabpanel"
                     aria-labelledby="v-pills-home-tab">
-                    <app-admin-products></app-admin-products>
+                    <div class="row mx-auto">
+                        <div class="col-md-9 col-12 px-0 mx-0">
+                            <app-admin-products></app-admin-products>
+                        </div>
+                        <div class="col-md-3 col-12 mx-0">
+                            <app-categories></app-categories>
+                        </div>
+                    </div>
+                    
+                    
+                    
                 </div>
                 <!-- PANEL DE VENTAS -->
                 <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">

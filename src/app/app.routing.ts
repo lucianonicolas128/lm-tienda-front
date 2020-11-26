@@ -12,6 +12,9 @@ import { EditSaleComponent } from './admin-components/sale/edit-sale/edit-sale.c
 import { MySaleComponent } from './components/sale/my-sale/my-sale.component';
 import { CartComponent } from './components/cart/cart.component';
 import { DetailProductComponent } from './components/product/detail-product/detail-product.component';
+import { ProductComponent } from './admin-components/product/product.component';
+import { ProductsComponent } from './components/products/products.component';
+import { AddProductComponent } from './admin-components/product/add-product/add-product.component';
 
 
 const appRoutes: Routes = [
@@ -24,7 +27,8 @@ const appRoutes: Routes = [
             // {path: 'categories', component: CategoriesComponent},
         ]
     },
-    
+    {path: 'products', component: ProductsComponent},
+    {path: 'admin/add-producto', component: AddProductComponent},
     {path: 'admin/edit-product/:id', component: AdminEditProductComponent},    
     {path: 'admin/edit-category/:id', component: EditCategoryComponent},
     {path: 'detail-product/:id', component: DetailProductComponent},
