@@ -1,0 +1,95 @@
+<div class="container" *ngIf="preferences">
+    <form class="card p-3" action="#!" #preferencesForm="ngForm" (ngSubmit)="onSubmit(preferencesForm)">
+        <h6 for="">Cuenta de banco para transferencias</h6>
+
+        <div class="form-inline my-2">
+            <label class="sr-only" for="inlineFormInputName2">Nombre Titular</label>
+            <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2"
+                placeholder="Nombre de titular de cuenta" name="nameBankAccount" #nameBankAccount="ngModel"
+                [(ngModel)]="preferences.nameBankAccount" required>
+
+            <label class="sr-only" for="inlineFormInputGroupUsername2"></label>
+            <div class="input-group mb-2 mr-sm-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">CBU/CVU</div>
+                </div>
+                <input type="number" class="form-control" id="inlineFormInputGroupUsername2" placeholder=""
+                    name="CBUBank" #CBUBank="ngModel" [(ngModel)]="preferences.CBUBank" required>
+            </div>
+
+            <label class="sr-only" for="inlineFormInputName2">Tipo de cuenta</label>
+            <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Tipo de cuenta"
+                name="boxTypeBank" #boxTypeBank="ngModel" [(ngModel)]="preferences.boxTypeBank" required>
+
+            <label class="sr-only" for="inlineFormInputName2">Nombre de Banco</label>
+            <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Nombre de Banco"
+                name="nameBank" #nameBank="ngModel" [(ngModel)]="preferences.nameBank" required>
+        </div>
+
+        <hr>
+
+        <h6>Terminos y condiciones</h6>
+        <textarea class="form-control mb-3" name="" id="" cols="20" rows="4" name="terminosYCondiciones"
+            #terminosYCondiciones="ngModel" [(ngModel)]="preferences.terminosYCondiciones" required></textarea>
+
+        <hr>
+
+        <div class="my-2">
+            <h6 class="">Medios de contacto</h6>
+            <div class="form-inline mt-2">
+                <!-- Telefono -->
+                <div class="input-group mb-2 mr-sm-1">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fab fa-whatsapp"></i></div>
+                    </div>
+                    <input type="number" class="form-control" id="inlineFormInputGroupUsername2"
+                        placeholder="Numero de whatsapp" name="phoneContact" #phoneContact="ngModel"
+                        [(ngModel)]="preferences.phoneContact" required>
+                </div>
+                <!-- Facebook -->
+                <div class="input-group mb-2 mr-sm-1">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fab fa-facebook-f"></i></div>
+                    </div>
+                    <input type="text" class="form-control" id="inlineFormInputGroupUsername2"
+                        placeholder="Link de facebook" name="facebook" #facebook="ngModel"
+                        [(ngModel)]="preferences.facebook" required>
+                </div>
+                <!-- Instagram -->
+                <div class="input-group mb-2 mr-sm-1">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fab fa-instagram"></i></div>
+                    </div>
+                    <input type="text" class="form-control" id="inlineFormInputGroupUsername2"
+                        placeholder="Link de instagram" name="instagram" #instagram="ngModel"
+                        [(ngModel)]="preferences.instagram" required>
+                </div>
+                <!-- Mail -->
+                <div class="input-group mb-2 mr-sm">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">@</div>
+                    </div>
+                    <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Email"
+                        name="emailContact" #emailContact="ngModel" [(ngModel)]="preferences.emailContact" required>
+                </div>
+            </div>
+
+            <!-- Dirección -->
+            <div class="input-group mt-2 mb-2 mr-sm-1">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fas fa-map-marker-alt"></i></div>
+                </div>
+                <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Dirección"
+                    name="ubicationContact" #ubicationContact="ngModel" [(ngModel)]="preferences.ubicationContact"
+                    required>
+            </div>
+        </div>
+
+        <button class="btn btn-primary my-3">Cargar Preferencias</button>
+
+
+
+    </form>
+
+
+</div>

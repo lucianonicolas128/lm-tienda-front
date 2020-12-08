@@ -45,11 +45,28 @@ export class ProductsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getProducts();
+    this._route.params.subscribe(params => {
+      let category = params.category;
+      this.getProductsCategory(category);
+    })
+
+    // this.getProducts();
     this.getCategories();
     this.filter = 'all';
     // this.productsFiltered = this.products.slice();
     this.updateFilter(this.filter);
+  }
+
+  getProductsCategory(category){
+    this._productService.getProductsCategory(category).subscribe(
+      response => {
+        this.products = response.productos;
+      },
+      error => {
+        console.log(<any>error);
+      }
+
+    )
   }
 
   getCategories() {
@@ -70,6 +87,7 @@ export class ProductsComponent implements OnInit {
       response => {
         if (response.products) {
           this.products = response.products;
+          this.products = this.products.filter(product => product.activated == true);
           this.products.forEach(product => {
             this.tallesAndStock = JSON.parse(product.stockTalles);
             product.stockTalles = JSON.parse(product.stockTalles);
@@ -86,6 +104,7 @@ export class ProductsComponent implements OnInit {
   }
 
   updateFilter(filter) {
+    this.getProducts();
     this.filter = filter;
     if (this.filter != 'all') {
       this.productsFiltered = this.products.filter(product => product.category == this.filter);

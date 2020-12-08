@@ -14,7 +14,8 @@ export class Product {
         public image: string,
         public imageAlt: string,
         public stockTalles: string,
-        public featured: boolean
+        public featured: boolean,
+        public activated: boolean
         // public stockTalles: StockTalles[] = []
     ) {}
 }

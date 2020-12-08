@@ -6,46 +6,52 @@ import { Global } from './global';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class PreferencesService{
+export class PreferencesService {
     public url: string;
 
     constructor(
         private _http: HttpClient
-    ){
+    ) {
         this.url = Global.url;
     }
 
 
-    savePreferences(preferences: Preferences): Observable<any>{
+    savePreferences(preferences: Preferences): Observable<any> {
         let params = JSON.stringify(preferences);
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-        return this._http.post(this.url+'save-preferences', params, {headers:headers});
+        return this._http.post(this.url + 'save-preferences', params, { headers: headers });
     }
 
-    getPreferences(id): Observable<any>{
+    getPreferences(id): Observable<any> {
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-        return this._http.get(this.url+'preferences/'+id, {headers:headers});
+        return this._http.get(this.url + 'preference/' + id, { headers: headers });
     }
 
-    deletePreferences(id): Observable<any>{
+    getPreferenceses(): Observable<any> {
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-        return this._http.delete(this.url+'preferences/'+id, {headers:headers});
+        return this._http.get(this.url + 'preferenceses', { headers: headers });
     }
 
-    updatePreferences(preferences): Observable<any>{
+    deletePreferences(id): Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+        return this._http.delete(this.url + 'preferences/' + id, { headers: headers });
+    }
+
+    updatePreferences(preferences): Observable<any> {
         let params = JSON.stringify(preferences);
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-        return this._http.put(this.url+'preferences/'+preferences._id, params, {headers:headers});
+        return this._http.put(this.url + 'preferences/' + preferences._id, params, { headers: headers });
     }
 
-    uploadImagePreferences(id): Observable<any>{
+    uploadImagePreferences(id): Observable<any> {
         /* let params = JSON.stringify(product); */
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-        return this._http.put(this.url+'upload-image-slider/'+id, {headers:headers});
+        return this._http.put(this.url + 'upload-image-slider/' + id, { headers: headers });
     }
 }

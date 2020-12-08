@@ -16,13 +16,16 @@ import { StockTalles } from '../../../models/stockTalles'
   providers: [ProductService, CategoryService, UploadService]
 })
 export class DetailProductComponent implements OnInit {
-
+  public products: Product[];
+  public productsRelacionados: Product[];
   public url: string;
   public confirm: boolean;
   public product: Product;
   public category: Category;
   public status;
   public save_product;
+
+  public categoryProduct;
 
   public stockTalles: StockTalles;
   public tallesAndStock;
@@ -43,6 +46,8 @@ export class DetailProductComponent implements OnInit {
       let id = params.id;
       this.getProduct(id);
     })
+
+    // this.getProducts();
   }
 
   getProduct(id) {
@@ -50,10 +55,11 @@ export class DetailProductComponent implements OnInit {
       response => {
         this.product = response.product;
 
-
         this.tallesAndStock = JSON.parse(this.product.stockTalles);
-        console.log(this.tallesAndStock);
         this.product.stockTalles = JSON.parse(this.product.stockTalles);
+
+        this.categoryProduct = response.product.category;
+        console.log(this.product.category);
 
         // if (this.product.stockTalles != '') {
         //   this.product.stock = 1;
@@ -66,21 +72,18 @@ export class DetailProductComponent implements OnInit {
           this.product.stock = 0;
         }
 
-
+        this.getProducts();
       }
     )
   }
 
-  addToCart() {
-
-      localStorage.setItem(this.product._id, JSON.stringify(this.product._id));
-      
-      this.status = 'success';
-      setTimeout(function () {
-        this.status = "failed";
-      }, 20);
-
-      this.ngOnInit();
+  addToCart(id) {
+    localStorage.setItem(this.product._id, JSON.stringify(this.product._id));
+    this.status = 'success';
+    setTimeout(function () {
+      this.status = "failed";
+    }, 20);
+    this.ngOnInit();
   }
 
   removeTalle(arr, item) {
@@ -89,21 +92,41 @@ export class DetailProductComponent implements OnInit {
     });
   }
 
-
   removeOneItem() {
-    
     this.product.stockTalles = JSON.stringify(this.newTallesArray);
     console.log(this.product.stockTalles);
     this._productService.updateProduct(this.product).subscribe(
       response => {
         if (response.product) {
-
           // response.product.stock = this.product.stock;
           this.save_product = response.product;
-
         }
       }
     )
+  }
+
+  closeToast() {
+    let modalToast = document.getElementById('modalToast');
+    modalToast.classList.remove('visible');
+    modalToast.classList.add('invisible');
+  }
+
+  getProducts() {
+    this._productService.getProducts().subscribe(
+      response => {
+        if (response.products) {
+          this.products = response.products;
+          this.productsRelacionados = (this.products.filter(product => product.category == this.categoryProduct)).slice(0, 4);
+        }
+      },
+      error => {
+        console.log(<any>error);
+      }
+    )
+  }
+
+  productosPopulares() {
+    this.productsRelacionados = (this.products.filter(product => product.category == this.product.category)).slice(0, 4);
   }
 
 }

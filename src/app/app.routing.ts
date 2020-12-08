@@ -15,6 +15,8 @@ import { DetailProductComponent } from './components/product/detail-product/deta
 import { ProductComponent } from './admin-components/product/product.component';
 import { ProductsComponent } from './components/products/products.component';
 import { AddProductComponent } from './admin-components/product/add-product/add-product.component';
+import { AddPreferencesComponent } from './admin-components/preferences/add-preferences/add-preferences.component';
+import { TerminosCondicionesComponent } from './components/terminos-condiciones/terminos-condiciones.component';
 
 
 const appRoutes: Routes = [
@@ -28,14 +30,17 @@ const appRoutes: Routes = [
         ]
     },
     {path: 'products', component: ProductsComponent},
+    {path: 'products/:category', component: ProductsComponent},
     {path: 'admin/add-producto', component: AddProductComponent},
+    {path: 'admin/add-preferences', component: AddPreferencesComponent},
     {path: 'admin/edit-product/:id', component: AdminEditProductComponent},    
     {path: 'admin/edit-category/:id', component: EditCategoryComponent},
     {path: 'detail-product/:id', component: DetailProductComponent},
     {path: 'cart', component: CartComponent},
     {path: 'admin/view-sale/:id', component: ViewSaleComponent},
     {path: 'admin/edit-sale/:id', component: EditSaleComponent},
-    {path: 'client/my-sale/:id', component: MySaleComponent}
+    {path: 'client/my-sale/:id', component: MySaleComponent},
+    {path: 'terminos-y-condiciones', component: TerminosCondicionesComponent}
     
 
 ];

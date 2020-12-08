@@ -17,6 +17,8 @@ export class PopularProductsComponent implements OnInit {
   public confirm: boolean;
   public product: Product;
   public productsPopular: Product[];
+  public statusAddCart: string;
+  public status;
 
   constructor(
     private _productService: ProductService,
@@ -50,6 +52,30 @@ export class PopularProductsComponent implements OnInit {
   productosPopulares(){
     let valor = true;
     this.productsPopular = this.products.filter(product => product.featured == valor);
+  }
+
+  addToCart(id) {
+
+    localStorage.setItem(id, JSON.stringify(id));
+
+    this.statusAddCart = 'succes';
+    this.status = 'success';
+    setTimeout(function () {
+      this.status = "failed";
+    }, 20);
+
+    this.ngOnInit();
+
+    let modalToast = document.getElementById('modalToast');
+    modalToast.classList.remove('invisible');
+    modalToast.classList.add('visible');
+  }
+
+  closeToast(){
+    let modalToast = document.getElementById('modalToast');
+    modalToast.classList.remove('visible');
+    modalToast.classList.add('invisible');
+
   }
 
 }

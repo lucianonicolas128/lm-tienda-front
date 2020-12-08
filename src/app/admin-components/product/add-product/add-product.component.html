@@ -24,13 +24,14 @@
                 <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image"
                     placeholder="Subir Imagen" (change)="fileChangeEvent($event)" />
             </p>
-    
+
             <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="" name="imageAlt"
                 #imageAlt="ngModel" [(ngModel)]="product.imageAlt">
-            <label class="text-small" for="">Coloque aquí un texto para describir la imagen. Esto ayuda al posicionamiento
-                en las busquedas en Google</label>    
+            <label class="text-small" for="">Coloque aquí un texto para describir la imagen. Esto ayuda al
+                posicionamiento
+                en las busquedas en Google</label>
         </div>
-        
+
         <!-- Name & category -->
         <div class="row my-4">
 
@@ -115,9 +116,19 @@
         </div>
 
         <div class="custom-control custom-checkbox my-4">
-            <input type="checkbox" class="custom-control-input" id="customCheck1" name="featured" #featured="ngModel"
-                [(ngModel)]="product.featured">
-            <label class="custom-control-label" for="customCheck1">Marcar este producto como destacado</label>
+            <div class="row">
+                <div class="col">
+                    <input type="checkbox" class="custom-control-input" id="customCheck1" name="featured"
+                        #featured="ngModel" [(ngModel)]="product.featured">
+                    <label class="custom-control-label" for="customCheck1">Marcar este producto como destacado</label>
+                </div>
+                <div class="col">
+                    <input type="checkbox" class="custom-control-input" id="customCheck2" name="activated"
+                        #activated="ngModel" [(ngModel)]="product.activated">
+                    <label class="custom-control-label" for="customCheck2">Producto Activado</label>
+                </div>
+            </div>
+            
         </div>
 
         <!-- Sign in button -->

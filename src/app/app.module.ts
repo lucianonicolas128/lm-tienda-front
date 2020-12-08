@@ -34,6 +34,11 @@ import { EditCategoryComponent } from './admin-components/category/edit-category
 import { DetailProductComponent } from './components/product/detail-product/detail-product.component';
 import { MySaleComponent } from './components/sale/my-sale/my-sale.component';
 import { CartComponent } from './components/cart/cart.component';
+import { PreferencesComponent } from './admin-components/preferences/preferences/preferences.component';
+import { AddPreferencesComponent } from './admin-components/preferences/add-preferences/add-preferences.component';
+import { EditPreferencesComponent } from './admin-components/preferences/edit-preferences/edit-preferences.component';
+import { TerminosCondicionesComponent } from './components/terminos-condiciones/terminos-condiciones.component';
+import { CategoriesUserComponent } from './components/categories-user/categories-user.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +70,12 @@ import { CartComponent } from './components/cart/cart.component';
     EditCategoryComponent,
     DetailProductComponent,
     MySaleComponent,
-    CartComponent
+    CartComponent,
+    PreferencesComponent,
+    AddPreferencesComponent,
+    EditPreferencesComponent,
+    TerminosCondicionesComponent,
+    CategoriesUserComponent
   ],
   imports: [
     BrowserModule,

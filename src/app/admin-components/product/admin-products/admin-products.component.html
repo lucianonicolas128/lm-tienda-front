@@ -34,20 +34,34 @@
                 <div class="card-body scrollspy-example scrollbar-success" *ngIf="filter == 'all'">
                     <div *ngFor="let product of products" class="mr-2 text-left">
                         <div class="row py-0">
+
                             <div class="col-1 align-baseline">
                                 <img src="{{product.image}}" class="img-fluid" alt="{{product.imageAlt}}">
                             </div>
-                            <div class="col-6 align-baseline">
+
+                            <div class="col-6 ">
                                 <p class="mx-2">{{product.name}}</p>
+                                <span (click)="setActivar(product)">
+                                    <span class="badge badge-danger mx-1" *ngIf="!product.activated">Desactivado</span>
+                                    <span class="badge badge-success mx-1" *ngIf="product.activated">Activado</span>
+                                </span>
+                                
+                                <span *ngIf="product.featured"><i class="fas fa-star text-warning mx-1"></i></span>
                             </div>
+
                             <div class="col-3 text-right">
-                                <h6 class="mx-2">$ {{product.price}}</h6>
-                                <!-- <p class="mx-2 grey-text mt-0">$300</p> -->
+                                <div class="row">
+                                    <span *ngIf="product.offer"><h6 class="mx-2 text-black-50">$ {{product.offer}}</h6></span>
+                                    <span *ngIf="product.offer"><s><h6 class="mx-2">$ {{product.price}}</h6></s></span>
+                                    <h6 *ngIf="!product.offer" class="mx-2">$ {{product.price}}</h6>
+                                </div>
                             </div>
+
                             <div class="row col align-baseline text-right">
                                 <i class="fas fa-edit" [routerLink]="['edit-product', product._id]"></i>
                                 <i class="fas fa-trash-alt ml-1" (click)="deleteProduct(product._id)"></i>
                             </div>
+
                         </div>
 
                         <span class="row py-0 ml-2">
@@ -65,27 +79,37 @@
 
 
                 <div class="card-body scrollspy-example scrollbar-success" *ngIf="filter != 'all'">
-                    <div *ngFor="let product of productsFiltered" class="mr-2">
-
-                        <span *ngIf="!product.name">
-                            Ningún producto cargado aún en esta categoría
-                        </span>
+                    <div *ngFor="let product of productsFiltered" class="mr-2 text-left">
 
                         <div class="row py-0">
+
                             <div class="col-1 align-baseline">
                                 <img src="{{product.image}}" class="img-fluid" alt="{{product.imageAlt}}">
                             </div>
-                            <div class="col-6 align-baseline">
+
+                            <div class="col-6 ">
                                 <p class="mx-2">{{product.name}}</p>
+                                <span (click)="setActivar(product)">
+                                    <span class="badge badge-danger mx-1" *ngIf="!product.activated">Desactivado</span>
+                                    <span class="badge badge-success mx-1" *ngIf="product.activated">Activado</span>
+                                </span>
+                                
+                                <span *ngIf="product.featured"><i class="fas fa-star text-warning mx-1"></i></span>
                             </div>
-                            <div class="col-2 text-right">
-                                <h6 class="mx-2">$ {{product.price}}</h6>
-                                <!-- <p class="mx-2 grey-text mt-0">$300</p> -->
+
+                            <div class="col-3 text-right">
+                                <div class="row">
+                                    <span *ngIf="product.offer"><h6 class="mx-2 text-black-50">$ {{product.offer}}</h6></span>
+                                    <span *ngIf="product.offer"><s><h6 class="mx-2">$ {{product.price}}</h6></s></span>
+                                    <h6 *ngIf="!product.offer" class="mx-2">$ {{product.price}}</h6>
+                                </div>
                             </div>
-                            <div class="row col ml-2 align-baseline text-right">
+
+                            <div class="row col align-baseline text-right">
                                 <i class="fas fa-edit" [routerLink]="['edit-product', product._id]"></i>
                                 <i class="fas fa-trash-alt ml-1" (click)="deleteProduct(product._id)"></i>
                             </div>
+
                         </div>
 
                         <span class="row py-0 ml-2">

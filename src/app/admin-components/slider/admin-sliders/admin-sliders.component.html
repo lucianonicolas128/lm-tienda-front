@@ -1,1 +1,65 @@
-<p>admin-sliders works!</p>
+<!-- Section: Block Content -->
+<section class="my-2">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-list">
+                <div class="card-header white d-flex justify-content-between align-items-center py-3">
+                    <p class="h5-responsive font-weight-bold mb-0">Lista de Imagenes del Slider</p>
+                    <ul class="list-unstyled d-flex align-items-center mb-0">
+                        <li><i class="far fa-window-minimize fa-sm pl-3"></i></li>
+                        <li><i class="fas fa-times fa-sm pl-3"></i></li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div *ngFor="let slider of sliders">
+                        <div class="row">
+
+                            <div class="col-1 align-baseline">
+                                <img src="{{slider.image}}" class="img-fluid" alt="">
+                            </div>
+    
+                            <div class="col-8">
+                                <p class="mx-2">{{slider.name}}</p>
+                            </div>    
+    
+                            <div class="row col align-baseline text-right">
+                                <!-- <i class="fas fa-edit" [routerLink]="['edit-slider', slider._id]"></i> -->
+                                <i class="fas fa-trash-alt ml-1" (click)="deleteSlider(slider._id)"></i>
+                            </div>
+
+                        </div>                        
+                    </div>
+                </div>
+                <div class="card-footer white py-3 d-flex justify-content-between">
+                    <button data-toggle="modal" data-target="#newSliderModal"
+                        class="btn btn-primary btn-md px-3 my-0 mr-0"><i class="fas fa-plus mr-2"></i> Nuevo
+                        slider</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<!-- Section: Block Content -->
+
+
+
+<div class="modal fade" id="newSliderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title w-100" id="myModalLabel">Nuevo producto</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="ngOnInit()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-admin-add-slider></app-admin-add-slider>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>

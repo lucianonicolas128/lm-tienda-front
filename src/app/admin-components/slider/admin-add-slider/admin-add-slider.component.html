@@ -1,1 +1,36 @@
-<p>admin-add-slider works!</p>
+<div class="bg-bloque" *ngIf="slider">
+
+    <div class="alert alert-success" *ngIf="status == 'succes'">
+        La imagen se ha agregado correctamente.
+    </div>
+    <div class="alert alert-danger" *ngIf="status == 'failed'">
+        La imagen no se ha podido agregar.
+    </div>
+
+    <!-- Default form subscription -->
+    <form class="text-center p-5" action="#!" #sliderForm="ngForm" (ngSubmit)="onSubmit(sliderForm)">
+        <div class="mb-3">
+            <span *ngIf="slider.image" class="mb-3">
+                <img src="{{slider.image}}" alt="" class="view-banner">
+            </span>
+        </div>
+        <!-- Name -->
+        <input type="text" id="defaultSubscriptionFormPassword" class="form-control mb-4" placeholder="Nombre de slider"
+            name="name" #name="ngModel" [(ngModel)]="slider.name" required>
+
+        <div class="input-group mb-4">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupFileAddon01">Cargar</span>
+            </div>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile01"
+                    aria-describedby="inputGroupFileAddon01" name="image" #image="ngModel" [(ngModel)]="slider.image"
+                    (change)="fileChangeEvent($event)" />
+                <label class="custom-file-label" for="inputGroupFile01">Elegir archivo para slider</label>
+            </div>
+        </div>
+        <!-- Sign in button -->
+        <button class="btn btn-info btn-block" type="submit" [disabled]="!sliderForm.form.valid">Cargar slider</button>
+    </form>
+    <!-- Default form subscription -->
+</div>

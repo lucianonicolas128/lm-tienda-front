@@ -6,12 +6,13 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { StockTalles } from '../../../models/stockTalles'
 import { CategoryService } from 'src/app/services/category.service';
 import { Category } from 'src/app/models/category';
+import { UploadService } from 'src/app/services/upload.service';
 
 @Component({
   selector: 'app-admin-products',
   templateUrl: './admin-products.component.html',
   styleUrls: ['./admin-products.component.css'],
-  providers: [ProductService, CategoryService]
+  providers: [ProductService, CategoryService, UploadService]
 })
 
 export class AdminProductsComponent implements OnInit {
@@ -27,11 +28,13 @@ export class AdminProductsComponent implements OnInit {
   public stock;
   public prueba = new Array();
   public filter: string = 'all';
+  public save_product;
 
   public stockTalles: StockTalles;
 
   constructor(
     private _productService: ProductService,
+    private _uploadService: UploadService,
     private _categoryService: CategoryService,
     private _router: Router,
     private _route: ActivatedRoute
@@ -87,6 +90,21 @@ export class AdminProductsComponent implements OnInit {
       this.productsFiltered = this.products;
     }
     
+  }
+
+  setActivar(product) {
+    if (!product.activated) {
+      product.activated = true;
+    } else {
+      product.activated = false;
+    }
+
+    this._productService.updateProduct(product).subscribe(
+      response => {
+        this.save_product = product;
+      }
+    )
+    this.ngOnInit();
   }
 
 

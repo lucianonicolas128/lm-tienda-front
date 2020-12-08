@@ -1,0 +1,8 @@
+<div>
+    <div *ngIf="preferences">
+        <app-edit-preferences></app-edit-preferences>
+    </div>
+    <div *ngIf="!preferences">
+        <app-add-preferences></app-add-preferences>
+    </div>
+</div>
