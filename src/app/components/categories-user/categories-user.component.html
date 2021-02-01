@@ -33,7 +33,7 @@
     <div class="category">
         <div class="container__category" id="gallery">
             <!-- Grid column -->
-            <div class="container__category--item col-md-3 col-11" *ngFor="let cat of categories">
+            <div class="container__category--item item-prueba col-md-3 col-11" *ngFor="let cat of categories">
                 <img [routerLink]="['/products', cat.name]" class="img-fluid" src="{{cat.image}}" alt="Card image cap">
                 <!-- <div class="category__item--detail">                    
                     <h5>{{cat.name}}</h5>
