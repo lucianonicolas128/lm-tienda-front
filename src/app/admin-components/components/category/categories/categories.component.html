@@ -1,0 +1,24 @@
+<mat-card class="categorylist mx-auto">
+    <mat-card-header>
+        <p class="h6 my-auto">Categorias</p>
+    </mat-card-header>
+
+    <mat-card-content class="tabla-products">
+        <mat-list class="p-3">
+            <div *ngIf="categories == null" class="spinner-border text-info text-center" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <span *ngIf="categories == null" class="w-100 text-center mt-2">
+                <p>Aun no hay categorías para mostrar.</p>
+            </span>
+
+            <app-category *ngFor="let category of categories" [category]="category"></app-category>
+        </mat-list>
+    </mat-card-content>
+
+    <mat-card-actions>
+        <button mat-raised-button color="primary" class="btn btn-primary" (click)="addCategory()">
+            <mat-icon>plus_one</mat-icon> Agregar Categoria
+        </button>
+    </mat-card-actions>
+</mat-card>

@@ -1,15 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
 
+
+/* PALETA DE COLORES
+AQUA FUERTE : 56AEA3
+ROSA FUERTE : F870A4
+ROSA CLARO : FEC2E4
+VIOLETA CLARO : BC87BF
+VIOLETA OSCURO : 613162
+
+*/
+
 .bg-primary {
-    background-color: #2f9ca0!important;
+    background-color: #14999e !important;
 }
 
-.bg-primary-light{
+.bg-primary-light {
     background-color: #bbfff4!important;
 }
 
 .bg-secondary {
-    background-color: #df3b9b!important;
+    background-color: #0e898d !important;
+}
+
+.bg-pink {
+    background-color: #F870A4 !important;
 }
 
 .bg-dark {
@@ -28,8 +42,12 @@
     width: 100%;
 }
 
+.mat-icon {
+    cursor: pointer;
+}
+
 .card-product-grid:hover {
-    box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
     -webkit-transform: scale(1.05, 1.05);
     transform: scale(1.05, 1.05);
     transition: box-shadow 0.3s ease-in-out;
@@ -37,7 +55,7 @@
 }
 
 .card-product-grid::after {
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
 }
@@ -54,17 +72,11 @@
     background-color: #2f9ca0!important;
 }
 
-.logo{
-    width: 100%;
-}
-
 .scrollspy-example {
     position: relative;
     height: 600px;
-    
     overflow: auto;
-  }
-  
+}
 
 .btn-outline-primary {
     color: #df3b9b!important;
@@ -73,8 +85,8 @@
 
 .btn-outline-primary:hover {
     color: rgb(255, 255, 255)!important;
-    background-color:  #df3b9b!important;
-    border-color:  #941760!important;
+    background-color: #df3b9b!important;
+    border-color: #941760!important;
 }
 
 .btn-secondary {
@@ -85,8 +97,8 @@
 
 .btn-secondary:hover {
     color: rgb(255, 255, 255)!important;
-    background-color:  #106669!important;
-    border-color:  #106669!important;
+    background-color: #106669!important;
+    border-color: #106669!important;
 }
 
 .text-small {
@@ -94,89 +106,40 @@
 }
 
 .shadow-top {
-    box-shadow: 0 -.5rem 1rem rgba(0,0,0,.15)!important;
+    box-shadow: 0 -.5rem 1rem rgba(0, 0, 0, .15)!important;
 }
 
-.image-product{
+.image-product {
     width: 100% !important;
 }
 
-.category{
-    width: 100%;
-    overflow: scroll;
-    padding: 15px;
-    position: relative;
-    overflow-y: hidden;
-}
-
-::-webkit-scrollbar-y {
-    display: none;
-}
-
-.container__category{
-    white-space: nowrap;
-    margin: 35px 0px;
-    padding-bottom: 10px;
-    
-}
-
-.container__category--item{
-    background-color: rgb(255, 255, 255);
-    /* width: 300px; */
-    /* height: auto; */
-    border-radius:20rem;
-    /* border-color: 1px rgb(79, 79, 79); */
-    overflow: hidden;
-    margin-right: 10px;
-    display: inline-block;
-    cursor: pointer;
-    transition: 450ms all;
-    transform-origin: center left;
-    position: relative;
-    border: 1px solid rgba(162, 162, 162, 0.125);
-    box-shadow: 10px 10px 16px -4px rgba(0,0,0,0.2);
-}
-
-/* .container__category--item img{
-    width: 100%;
-    height: auto;
-
-} */
-
-.container__category--item:hover ~ .container__category--item{
-    transform: translate3d(100px, 0, 0);
-}
-
-.container__category:hover .container__category--item {
-    opacity: 0.3;
-}
-
-.container__category:hover .container__category--item:hover {
-    transform: scale(1.2);
-    opacity: 1;
-}
-
-.item__img{
+.item__img {
     object-fit: none;
-    /* width: 300px;
-    height: 300px; */
-    /* width: 100%; */
 }
 
-.item-prueba{
+.item-prueba {
     padding: 0;
 }
 
-.category__item--detail{
+.category__item--detail {
     background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
     font-size: 10px;
     opacity: 0;
     transition: 450ms opacity;
-    /* padding: 10px; */
     position: absolute;
     width: 100%;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
 }

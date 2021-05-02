@@ -1,18 +1,19 @@
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner" role="listbox">
         <div>
-            <div class="carousel-item" [ngClass]="{active:isFirst}" *ngFor="let slider of sliders;
+            <div class="carousel-item slider" [ngClass]="{active:isFirst}" *ngFor="let slider of sliders;
             index as i;first as isFirst">
                 <img class="d-block w-100" src="{{slider.image}}" alt="First slide">
+                <!-- <img class="d-block w-100" src="https://previews.123rf.com/images/oleola/oleola1706/oleola170600045/80230606-universal-sale-background-design-for-banner-flyer-wallpaper-promotional-discount-shop-materials-post.jpg" alt="First slide"> -->
             </div>
         </div>
     </div>
-    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <!-- <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
     </a>
     <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
-    </a>
+    </a> -->
 </div>

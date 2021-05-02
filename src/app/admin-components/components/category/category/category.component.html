@@ -1,0 +1,10 @@
+<div class="row">
+    <p class="col-md-10 col-10 text-primary text-left my-2">{{category.name}}</p>
+    <div class="col-md-2 col-2">
+        <div class="row">
+            <mat-icon mat-button (click)="editCategory(category._id)">edit</mat-icon>
+            <mat-icon mat-button (click)="deleteCategory(category._id)">delete</mat-icon>
+        </div>
+    </div>
+</div>
+<hr>

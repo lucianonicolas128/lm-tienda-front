@@ -1,0 +1,9 @@
+.categorylist {
+    height: 20vh;
+}
+
+.tabla-products {
+    height: 20.7vh;
+    overflow: scroll;
+    overflow-x: hidden;
+}

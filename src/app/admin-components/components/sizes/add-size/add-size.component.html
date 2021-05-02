@@ -1,0 +1,36 @@
+<div class="alert alert-success" *ngIf="status == 'succes'"> El talle se ha agregado correctamente. </div>
+<div class="alert alert-danger" *ngIf="status == 'failed'"> El talle no se ha podido agregar. </div>
+<div class="alert alert-warning text-center" *ngIf="status == 'loading'">
+    <div class="spinner-border text-primary text-center" role="status"> <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+<h2>Agregar nuevo talle</h2>
+
+<form action="" [formGroup]="formTalle" (ngSubmit)="onSubmit(formTalle)" class="mx-auto px-auto">
+    <mat-form-field class="w-100">
+        <mat-label>Talle</mat-label>
+        <input type="text" matInput formControlName="talleName">
+    </mat-form-field>
+    <div class="row mx-auto w-100">
+        <div class="col-lg-6">
+            <mat-form-field class="w-100">
+                <mat-label>Ancho</mat-label>
+                <input type="number" matInput formControlName="ancho">
+            </mat-form-field>
+        </div>
+
+        <div class="col-lg-6">
+            <mat-form-field class="w-100">
+                <mat-label>Alto/largo</mat-label>
+                <input type="number" matInput formControlName="alto">
+            </mat-form-field>
+        </div>
+
+        <mat-form-field class="w-100">
+            <mat-label>Descripción</mat-label>
+            <textarea type="text" matInput formControlName="detalle"></textarea>
+        </mat-form-field>
+    </div>
+    <button mat-raised-button class="btn btn-primary text-white w-100">Agregar talle</button>
+</form>

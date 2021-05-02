@@ -1,16 +1,178 @@
 <app-header></app-header>
+<div class="container mt-3">
+    <mat-horizontal-stepper linear #stepper>
+
+        <mat-step [stepControl]="cartForm">
+            <ng-template matStepLabel>Los productos de tu carrito</ng-template>
+            <div class="products">
+                <div class="product--row py-1" *ngFor="let product of products, index as i">
+                    <div class="row">
+                        <div class="col-md-1 product--row__img">
+                            <img src="{{product.image}}" alt="" class="img-fluid z-depth-0 image-product-cart">
+                        </div>
+                        <div class="col-md-5">
+                            <h3>{{product.name}}</h3>
+                        </div>
+                        <div class="col-md-2">
+                            <h3>{{product.stockTalles}}</h3>
+                        </div>
+                        <div class="col-md-3">
+                            <span *ngIf="product.offer">
+                                <h3 class="mx-2 product--item__title text-black-50 ">{{product.offer | currency: '$'}}
+                                </h3>
+                                <h3 class="mx-2 product--item__title tachado">{{product.price | currency: '$'}}</h3>
+                            </span>
+                            <h3 *ngIf="!product.offer" class="mx-2 product--item__title">{{product.price | currency:
+                                '$'}}
+                            </h3>
+                        </div>
+                        <div class="col-md-1">
+                            <button type="button" class="btn btn-sm btn-primary" data-toggle="tooltip"
+                                data-placement="top" value="product._id" title="Remove item"
+                                (click)="removeItemToCart(product.stock)">X
+                            </button>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            <div class="w-100">
+                <h2 class="text-right">Total {{totalSell | currency: '$'}}</h2>
+            </div>
+            <hr>
+            <div class="text-center">
+                <button mat-raised-button class="btn btn-primary text-white" matStepperNext>Siguiente!</button>
+            </div>
+        </mat-step>
+
+        <mat-step [stepControl]="paymentForm" label="Datos de tu compra">
+            <form [formGroup]="paymentForm" (ngSubmit)="onSubmit(paymentForm)">
+                <div class="row mx-auto">
+                    <div class="col-md-6">
+                        <mat-form-field class="w-100">
+                            <mat-label>Nombre completo</mat-label>
+                            <input type="text" matInput formControlName="nameClient">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="w-100">
+                            <mat-label>Teléfono</mat-label>
+                            <input type="text" matInput formControlName="phoneClient">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <mat-form-field class="w-100 mx-auto">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput formControlName="emailClient">
+                </mat-form-field>
+
+                <mat-divider></mat-divider>
+
+                <h3 class="mt-3">Envío de la compra</h3>
+                <mat-radio-group aria-labelledby="example-radio-group-label" formControlName="shipping">
+                    <mat-radio-button value="retiro-personal" class="example-radio-button">
+                        Retiro Personalmente
+                    </mat-radio-button> <br>
+                    <mat-radio-button value="domicilio" class="example-radio-button">
+                        Envío a domicilio
+                    </mat-radio-button>
+                </mat-radio-group>
+
+                <mat-card>
+                    <mat-card-content>
+                        <span *ngIf="shippingField != null && shippingField.value == 'domicilio'">
+                            <div class="visible">
+                                <mat-form-field class="w-100">
+                                    <mat-label>Dirección</mat-label>
+                                    <input type="text" matInput formControlName="address">
+                                </mat-form-field>
+                            </div>
+                            <div class="row mx-auto">
+                                <div class="col-md-6">
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Ciudad</mat-label>
+                                        <input type="text" matInput formControlName="city">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Provincia</mat-label>
+                                        <input type="text" matInput formControlName="state">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </span>
+                    </mat-card-content>
+                </mat-card>
+
+                <h3 class="mt-3">Modo de pago</h3>
+                <mat-radio-group aria-labelledby="example-radio-group-label" formControlName="pay">
+                    <mat-radio-button value="efectivo" class="example-radio-button"
+                        *ngIf="shippingField != null && shippingField.value == 'retiro-personal'">
+                        Efectivo al retirar
+                    </mat-radio-button> <br>
+                    <p class="text-five" *ngIf="payField != null && payField.value == 'efectivo'">
+                        Una vez el producto esté preparado, podrás acercarte al negocio para abonar tu compra.
+                    </p>
+                    <mat-radio-button value="transferencia" class="example-radio-button">
+                        Transferencia de Banco
+                    </mat-radio-button> <br>
+                    <p class="text-five" *ngIf="payField != null && payField.value == 'transferencia'">
+                        Una vez finalices tu compra, te aparecera el nombre de la cuenta y el CBU para abonar.
+                    </p>
+                    <mat-radio-button value="mercadopago" class="example-radio-button">
+                        Enviar dinero como amigo por MercadoPago
+                    </mat-radio-button>
+                    <p class="text-five" *ngIf="payField != null && payField.value == 'mercadopago'">
+                        Una vez finalices tu compra, te aparecera el mail y número de teléfono para enviar dinero como
+                        amigo vía MercadoPago!
+                    </p>
+                </mat-radio-group>
+
+                <div class="d-block my-3">
+                    <p class="text-black-50 text-small">Al hacer click en Finalizar compra, aceptas nuestros <a
+                            href="/terminos-y-condiciones" target="_blank">términos y condiciones.</a> Los datos
+                        completados en este formulario son solo utilizados para contactarnos luego de la compra. Uba
+                        vez finalizado el proceso de compra, son desestimados.</p>
+                </div>
+
+                <div>
+                    <div class="text-center">
+                        <button mat-raised-button class="btn btn-secondary text-white mx-2"
+                            matStepperPrevious>Atras</button>
+                        <button mat-raised-button class="btn btn-primary text-white mx-2" matStepperNext
+                            [disabled]="paymentForm.invalid">Siguiente!</button>
+                    </div>
+                </div>
+
+            </form>
+        </mat-step>
+
+        <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            <h2 class="w-100 text-center">¡Gracias por tu compra!</h2>
+            <h3 class="w-100 text-center">En 3 segundos serás redirigida/o al detalle de tu compra...</h3>
+            <!-- SUBMIT -->
+            <div class="">
+                <!-- <button type="submit" class="btn btn-primary mx-auto my-3 py-3 z-depth-1 rounded btn-rounded col-12"
+          [disabled]="paymentForm.invalid">Ir a ver mi compra
+          <i class="fas fa-angle-right right"></i>
+        </button> -->
+            </div>
+            <!-- <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button (click)="stepper.reset()">Reset</button>
+            </div> -->
+        </mat-step>
+
+    </mat-horizontal-stepper>
+</div>
+
+
+
+<!-- <app-header></app-header>
 <div class="container" *ngIf="sale">
-
-
-  <!-- TOAST -->
-  <div class="alert alert-success" *ngIf="status == 'succes'">
-    La compra se ha concretado correctamente.
-  </div>
-  <div class="alert alert-danger" *ngIf="status == 'failed'">
-    La compra no se ha podido concretar.
-  </div>
-  <!-- TOAST -->
-
   <div class="row my-4">
     <div class="col-md-7 col-sm-12 py-3">
       <div class="card card-list">
@@ -19,6 +181,7 @@
         </div>
         <div class="card-body mb-5">
           <table class="table">
+
             <thead>
               <tr>
                 <th></th>
@@ -30,10 +193,7 @@
               </tr>
             </thead>
 
-            <!-- BODY -->
             <tbody>
-
-              <!-- Product row -->
               <tr id="cart-list" *ngFor="let product of products">
                 <th scope="row" *ngIf="product.image">
                   <img src="{{product.image}}" alt="" class="img-fluid z-depth-0 image-product-cart">
@@ -51,8 +211,8 @@
                   </button>
                 </td>
               </tr>
-              <!-- /.Product row -->
             </tbody>
+
           </table>
         </div>
         <div class="card-footer white py-3 d-flex justify-content-between">
@@ -61,16 +221,11 @@
       </div>
     </div>
 
-    <!-- Datos de la compra -->
     <div class="card col-md-5 col-sm-12 mx-auto my-3 py-3 px-3">
       <form action="#!" #saleForm="ngForm" (ngSubmit)="onSubmit(saleForm)">
-
-        <!-- TITULO DE LOS DATOS DE LA COMPRA -->
         <h5>Datos de la compra</h5>
         <hr>
-
         <div class="row">
-          <!-- NOMBRE -->
           <div class="col-md-6 mb-4">
             <label for="firstName" class="">Nombre</label>
             <input type="text" id="firstName" class="form-control" name="nameClient" #nameClient="ngModel"
@@ -79,9 +234,6 @@
               El nombre es obligatorio
             </span>
           </div>
-          <!-- NOMBRE -->
-
-          <!-- TELEFONO -->
           <div class="col-md-6 mb-2">
             <label for="lastName" class="">Telefono</label>
             <input type="number" id="lastName" class="form-control" name="phoneClient" #phoneClient="ngModel"
@@ -90,57 +242,41 @@
               El telefono es obligatorio
             </span>
           </div>
-          <!-- TELEFONO -->
 
         </div>
 
-        <!-- E-MAIL -->
         <label for="email" class="">Email</label>
         <input type="text" id="email" class="form-control mb-4" placeholder="youremail@example.com" name="emailClient"
           #emailClient="ngModel" [(ngModel)]="sale.emailClient" required>
         <span class="form_error text-small text-danger" *ngIf="emailClient.touched && !emailClient.valid">
           El mail es obligatorio
         </span>
-        <!-- E-MAIL -->
 
-
-        <!-- ENVIO -->
         <hr>
         <h6 class="mt-3">Envío de la compra</h6>
         <hr>
 
         <div class="">
-
-          <!-- RETIRO PERSONALMENTE -->
           <div class="custom-control custom-radio mb-2">
-
             <input value="retiro-personal" type="radio" id="customRadio1" name="customRadio"
               class="custom-control-input" name="shipping" #shipping="ngModel" [(ngModel)]="sale.shipping" checked
               required>
-
             <label class="custom-control-label" for="customRadio1">
               Retiro personalmente
             </label>
-
           </div>
-          <!-- RETIRO PERSONALMENTE -->
 
-          <!-- ENVIO A DOMICILIO -->
           <div class="custom-control custom-radio">
-
             <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="domicilio"
               name="shipping" #shipping="ngModel" [(ngModel)]="sale.shipping" required>
-
             <label class="custom-control-label" for="customRadio2">
               Envío a domicilio
             </label>
-
             <br>
           </div>
           <span class="mt-3" *ngIf="sale.shipping == 'domicilio'">
             <div class="visible">
 
-              <!-- DIRECCION -->
               <label for="firstName" class="mt-3">Dirección</label>
               <input type="text" id="firstName" class="form-control" name="address" #address="ngModel"
                 [(ngModel)]="sale.address" required>
@@ -149,7 +285,6 @@
               </span>
 
               <div class="row mt-2">
-                <!-- CIUDAD -->
                 <div class="col-md-6 mb-4">
                   <label for="firstName" class="">Ciudad</label>
                   <input type="text" id="firstName" class="form-control" name="city" #city="ngModel"
@@ -159,8 +294,6 @@
                   </span>
                 </div>
 
-                <!-- CIUDAD -->
-                <!-- PROVINCIA -->
                 <div class="col-md-6 mb-2">
                   <label for="lastName" class="">Provincia</label>
                   <input type="text" id="lastName" class="form-control" value="Entre Rios" name="state" #state="ngModel"
@@ -169,19 +302,11 @@
                     La Provincia es obligatoria
                   </span>
                 </div>
-                <!-- PROVINCIA -->
               </div>
-
-              <!-- DIRECCION -->
             </div>
-
           </span>
-          <!-- ENVIO A DOMICILIO -->
-
         </div>
-        <!-- Envio -->
 
-        <!-- Pago -->
         <hr>
         <h6 class="mt-3">Modo de pago</h6>
         <hr>
@@ -215,7 +340,6 @@
             </p>
           </div>
         </div>
-        <!-- Pago -->
 
         <div class="d-block my-3">
           <p class="text-black-50 text-small">Al hacer click en Finalizar compra, aceptas nuestros <a
@@ -224,19 +348,14 @@
             para contactarnos luego de la compra. Uba vez finalizado el proceso de compra, son desestimados.</p>
         </div>
 
-        <!-- SUBMIT -->
         <div class="">
           <button type="submit" class="btn btn-primary mx-auto my-3 py-3 z-depth-1 rounded btn-rounded col-12"
             [disabled]="!saleForm.form.valid">Finalizar compra
             <i class="fas fa-angle-right right"></i>
           </button>
         </div>
-        <!-- SUBMIT -->
 
       </form>
-
     </div>
-
   </div>
-
-</div>
+</div> -->

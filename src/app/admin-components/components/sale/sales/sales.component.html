@@ -1,0 +1,51 @@
+<!-- Section: Block Content -->
+<section class="my-2">
+
+    <mat-card>
+        <mat-card-header>
+            <p class="h6">Ventas</p>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-list class="p-3">
+                <div class="row font-weight-bold">
+                    <div class="container-fluid">
+                        <div class="row titulos text-center">
+                            <div class="col-lg-1">
+                                Fecha
+                            </div>
+                            <div class="col-lg-3">
+                                Nombre
+                            </div>
+                            <div class="col-lg-2">
+                                Telefono
+                            </div>
+                            <div class="col-lg-2">
+                                Email
+                            </div>
+                            <div class="col-lg-1">
+                                Envío
+                            </div>
+                            <div class="col-lg-1">
+                                Estado
+                            </div>
+                            <div class="col-lg-1">
+                                Total
+                            </div>
+                            <div class="col-lg-1">
+                                Acciones
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="sales == null" class="spinner-border text-info text-center" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <span *ngIf="sales == null" class="w-100 text-center mt-2">
+                    <p>Aun no hay ventas para mostrar.</p>
+                </span>
+                <hr>
+                <app-sale-admin *ngFor="let sale of sales" [sale]="sale"></app-sale-admin>
+            </mat-list>
+        </mat-card-content>
+    </mat-card>
+</section>

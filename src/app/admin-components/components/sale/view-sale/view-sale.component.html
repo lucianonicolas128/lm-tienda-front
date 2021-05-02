@@ -1,0 +1,65 @@
+<mat-dialog-content class="mat-typography">
+    <div *ngIf="sale" class="w-100 container-fluid">
+        <h2>{{sale.nameClient}}</h2>
+        <div>
+            <div class="row mx-2">
+                <div class="col-md-3">
+                    Telefono: {{sale.phoneClient}}
+                </div>
+                <div class="col-md-3">
+                    E-mail: {{sale.emailClient}}
+                </div>
+                <div class="col-md-3">
+                    Tipo de envío:
+                    <span *ngIf="sale.shipping == 'domicilio'" class="text-primary">A domicilio</span>
+                    <span *ngIf="sale.shipping == 'retiro-personal'" class="text-four">Retira por local</span>
+                </div>
+                <div class="col-md-3">
+                    Estado:
+                    <span *ngIf="sale.status == 'proceso'" class="badge badge-danger">
+                        En proceso
+                    </span>
+                    <span *ngIf="sale.status == 'preparado'" class="badge badge-warning">
+                        Preparado
+                    </span>
+                    <span *ngIf="sale.status == 'despachado'" class="badge badge-info">
+                        En camino
+                    </span>
+                    <span *ngIf="sale.status == 'entregado'" class="badge badge-success">
+                        Entregado
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="card p-3 my-1 mt-3">
+            <h3>Productos comprados</h3>
+
+            <div class="py-1" *ngFor="let product of products">
+                <div class="row mx-auto">
+                    <div class="col-md-1 product--image">
+                        <img src="{{product.image}}" alt="" class="img-fluid z-depth-0 image-product-cart">
+                    </div>
+                    <div class="col-md-7">
+                        <h3>{{product.name}}</h3>
+                    </div>
+                    <div class="col-md-2">
+                        <h3>{{product.stockTalles}}</h3>
+                    </div>
+                    <div class="col-md-2 text-right">
+                        <span *ngIf="product.offer">
+                        <h3 class="mx-2 product--item__title text-black-50 ">{{product.offer | currency: '$'}}
+                        </h3>
+                        <h3 class="mx-2 product--item__title tachado">{{product.price | currency: '$'}}</h3>
+                    </span>
+                        <h3 *ngIf="!product.offer" class="mx-2 product--item__title">{{product.price | currency: '$'}}
+                        </h3>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+        <div class="card p-2 my-1 w-100 text-right">
+            <h2>Total: {{sale.total | currency: '$'}}</h2>
+        </div>
+    </div>
+</mat-dialog-content>

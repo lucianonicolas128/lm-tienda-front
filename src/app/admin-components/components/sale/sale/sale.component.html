@@ -1,0 +1,41 @@
+<div class="row text-center">
+    <div class="col-lg-1 col-2 date text-primary m-0 p-0">
+        {{sale.date}}
+    </div>
+    <div class="col-lg-3 col-4 m-0 p-0 texto">
+        {{sale.nameClient}}
+    </div>
+    <div class="col-lg-2 no-view">
+        {{sale.phoneClient}}
+    </div>
+    <div class="col-lg-2 no-view">
+        {{sale.emailClient}}
+    </div>
+    <div class="col-lg-1 no-view">
+        <span *ngIf="sale.shipping == 'domicilio'" class="text-primary">A domicilio</span>
+        <span *ngIf="sale.shipping == 'retiro-personal'" class="text-four">Retira por local</span>
+    </div>
+    <div class="col-lg-1 no-view">
+        <span *ngIf="sale.status == 'proceso'" class="badge badge-danger">
+                En proceso
+            </span>
+        <span *ngIf="sale.status == 'preparado'" class="badge badge-warning">
+                Preparado
+            </span>
+        <span *ngIf="sale.status == 'despachado'" class="badge badge-info">
+                En camino
+            </span>
+        <span *ngIf="sale.status == 'entregado'" class="badge badge-success">
+                Entregado
+            </span>
+    </div>
+    <div class="col-lg-1 col-3 m-0 p-0 texto">
+        {{sale.total | currency: '$'}}
+    </div>
+    <div class="col-lg-1 col-3 m-0 p-0 texto">
+        <mat-icon (click)="viewSale(sale._id)">remove_red_eye</mat-icon>
+        <mat-icon (click)="editSale(sale._id)">edit</mat-icon>
+        <mat-icon (click)="deleteSale(sale._id)">delete</mat-icon>
+    </div>
+</div>
+<hr>

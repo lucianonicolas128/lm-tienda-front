@@ -1,0 +1,152 @@
+<!-- <div *ngIf="preferences"> -->
+<mat-card>
+    <h2>Ajustes y preferencias</h2>
+    <mat-card-content class="tabla-preferences">
+        <form [formGroup]="formPreferences" (ngSubmit)="onSubmit(formPreferences)">
+            <h3 for="">Cuenta de banco para transferencias</h3>
+
+            <div class="row mx-auto">
+                <div class="col-md-2">
+                    <mat-form-field class="w-100">
+                        <mat-label>Nombre titular</mat-label>
+                        <input type="text" matInput formControlName="nameBankAccount">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-5">
+                    <mat-form-field class="w-100">
+                        <mat-label>CBU/Alias</mat-label>
+                        <input type="text" matInput formControlName="CBUBank">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-2">
+                    <mat-form-field class="w-100">
+                        <mat-label>Tipo de cuenta</mat-label>
+                        <input type="text" matInput formControlName="boxTypeBank">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                    <mat-form-field class="w-100">
+                        <mat-label>Nombre del Banco</mat-label>
+                        <input type="text" matInput formControlName="nameBank">
+                    </mat-form-field>
+                </div>
+            </div>
+            <hr>
+            <h3>Sección <strong>Términos y condiciones</strong></h3>
+            <div class="mx-auto">
+                <mat-form-field class="w-100">
+                    <mat-label>Quienes somos</mat-label>
+                    <textarea matInput id="" cols="30" rows="5" formControlName="terminosYCondiciones"></textarea>
+                </mat-form-field>
+            </div>
+            <hr>
+            <h3>Contácto y Redes Sociales</h3>
+            <div class="row mx-auto">
+                <div class="col-md-3">
+                    <mat-form-field class="w-100">
+                        <mat-label>Whatsapp </mat-label>
+                        <input type="text" matInput formControlName="phoneContact">
+                        <span matSuffix><i class="fab fa-whatsapp"></i></span>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                    <mat-form-field class="w-100">
+                        <mat-label>Facebook </mat-label>
+                        <input type="text" matInput formControlName="facebook">
+                        <span matSuffix><i class="fab fa-facebook-f"></i></span>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                    <mat-form-field class="w-100">
+                        <mat-label>Instagram </mat-label>
+                        <input type="text" matInput formControlName="instagram">
+                        <span matSuffix><i class="fab fa-instagram"></i></span>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                    <mat-form-field class="w-100">
+                        <mat-label>E-mail </mat-label>
+                        <input type="text" matInput formControlName="emailContact">
+                        <span matSuffix>
+                            <mat-icon>email</mat-icon>
+                        </span>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="mx-auto">
+                <mat-form-field class="w-100">
+                    <mat-label>Ubicación</mat-label>
+                    <input type="text" matInput formControlName="ubicationContact">
+                    <span matSuffix>
+                        <mat-icon>add_location</mat-icon>
+                    </span>
+                </mat-form-field>
+            </div>
+            <button class="btn btn-primary my-3 w-100">Cargar Preferencias</button>
+        </form>
+    </mat-card-content>
+</mat-card>
+<!-- <form class="card p-3" action="#!" #preferencesForm="ngForm" (ngSubmit)="onSubmit(preferencesForm)"> -->
+
+<!-- <div class="form-inline my-2">
+    <label class="sr-only" for="inlineFormInputName2">Nombre Titular</label>
+    <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Nombre de titular de cuenta" name="nameBankAccount" #nameBankAccount="ngModel" [(ngModel)]="preferences.nameBankAccount" required>
+
+    <label class="sr-only" for="inlineFormInputGroupUsername2"></label>
+    <div class="input-group mb-2 mr-sm-2">
+        <div class="input-group-prepend">
+            <div class="input-group-text">CBU/CVU</div>
+        </div>
+        <input type="number" class="form-control" id="inlineFormInputGroupUsername2" placeholder="" name="CBUBank" #CBUBank="ngModel" [(ngModel)]="preferences.CBUBank" required>
+    </div>
+
+    <label class="sr-only" for="inlineFormInputName2">Tipo de cuenta</label>
+    <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Tipo de cuenta" name="boxTypeBank" #boxTypeBank="ngModel" [(ngModel)]="preferences.boxTypeBank" required>
+
+    <label class="sr-only" for="inlineFormInputName2">Nombre de Banco</label>
+    <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Nombre de Banco" name="nameBank" #nameBank="ngModel" [(ngModel)]="preferences.nameBank" required>
+</div>
+<hr>
+<h6>Terminos y condiciones</h6>
+<textarea class="form-control mb-3" name="" id="" cols="20" rows="4" name="terminosYCondiciones" #terminosYCondiciones="ngModel" [(ngModel)]="preferences.terminosYCondiciones" required></textarea>
+<hr>
+<div class="my-2">
+    <h6 class="">Medios de contacto</h6>
+    <div class="form-inline mt-2">
+        <div class="input-group mb-2 mr-sm-1">
+            <div class="input-group-prepend">
+                <div class="input-group-text"><i class="fab fa-whatsapp"></i></div>
+            </div>
+            <input type="number" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Numero de whatsapp" name="phoneContact" #phoneContact="ngModel" [(ngModel)]="preferences.phoneContact" required>
+        </div>
+        <div class="input-group mb-2 mr-sm-1">
+            <div class="input-group-prepend">
+                <div class="input-group-text"><i class="fab fa-facebook-f"></i></div>
+            </div>
+            <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Link de facebook" name="facebook" #facebook="ngModel" [(ngModel)]="preferences.facebook" required>
+        </div>
+        <div class="input-group mb-2 mr-sm-1">
+            <div class="input-group-prepend">
+                <div class="input-group-text"><i class="fab fa-instagram"></i></div>
+            </div>
+            <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Link de instagram" name="instagram" #instagram="ngModel" [(ngModel)]="preferences.instagram" required>
+        </div>
+        <div class="input-group mb-2 mr-sm">
+            <div class="input-group-prepend">
+                <div class="input-group-text">@</div>
+            </div>
+            <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Email" name="emailContact" #emailContact="ngModel" [(ngModel)]="preferences.emailContact" required>
+        </div>
+    </div>
+
+    <div class="input-group mt-2 mb-2 mr-sm-1">
+        <div class="input-group-prepend">
+            <div class="input-group-text"><i class="fas fa-map-marker-alt"></i></div>
+        </div>
+        <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Dirección" name="ubicationContact" #ubicationContact="ngModel" [(ngModel)]="preferences.ubicationContact" required>
+    </div>
+</div>
+
+<button class="btn btn-primary my-3">Cargar Preferencias</button> -->
+<!-- </form> -->
+<!-- </div> -->

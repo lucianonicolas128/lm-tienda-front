@@ -1,0 +1,95 @@
+<app-header></app-header>
+<div class="container" *ngIf="product">
+    <section class="text-center">
+        <div class="row mt-5 mb- pt-3">
+
+            <div class="col-lg-7">
+                <div id="carousel-thumb1" class="carousel slide carousel-fade carousel-thumbnails mb-5 pb-4"
+                    data-ride="carousel">
+
+                    <div class="carousel-inner text-center text-md-left" role="listbox">
+                        <div class="carousel-item active">
+                            <img src="{{product.image}}" alt="First slide"
+                                class="img image-product pl-2 pr-5 pb-5 product-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-5 text-center text-md-left">
+                <h2
+                    class="h2-responsive text-center text-md-left product-name font-weight-bold dark-grey-text mb-1 ml-xl-0 ml-4">
+                    {{product.name}}
+                </h2>
+                <span class="badge badge-primary product mb-4 ml-xl-0 ml-4">¡EN STOCK!</span>
+                <span class="badge badge-secondary product mb-4 ml-2" *ngIf="product.offer">OFERTA</span>
+                <hr>
+                <h2 class="h2-responsive text-center text-md-left mb-5 ml-xl-0 ml-4">
+                    <span class="red-text font-weight-bold">
+                        <span *ngIf="product.offer">
+                            <strong>{{product.offer | currency : '$'}}</strong>
+                            <span class="grey-text ml-1">
+                                <small>
+                                    <s>{{product.price | currency : '$'}}</s>
+                                </small>
+                            </span>
+                        </span>
+                        <span *ngIf="!product.offer">
+                            <strong>{{product.price | currency : '$'}}</strong>
+                        </span>
+                    </span>
+                </h2>
+
+                <div class="font-weight-normal mb-4">
+                    <p class="ml-xl-0 ml-4">{{product.description}}</p>
+                </div>
+                <hr>
+
+                <p class="grey-text">Talles disponibles: <br></p>
+                <div class="form-row mb-5 mx-3">
+                    <div class="row text-center">
+                        <div *ngFor="let talle of tallesAndStock" class="mr-2 pr-1">
+                            <a class="badge badge-info">{{talle.talleName}}</a>
+                        </div>
+                    </div>
+                </div>
+                <p class="grey-text mt-5">Selecciona un Talle</p>
+                <div class="row">
+                    <div class="col text-left mt-0 mb-2">
+                        <div class="row">
+                            <select class="form-control browser-default custom-select " type="spinner" id="talle"
+                                required>
+                                <option value="">Talle único</option>
+                                <option value="{{talle.talleName}}" name="category"
+                                    *ngFor="let talle of tallesAndStock">
+                                    {{talle.talleName}}
+                                </option>
+                                <span *ngIf="tallesAndStock < 1">
+                                    <option value="">Talle único</option>
+                                </span>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-rounded mt-0 col" (click)="addToCart()">
+                    <i class="fas fa-cart-plus mr-2" aria-hidden="true"></i> Agregar al carrito
+                </button>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div class="container">
+    <section class="text-center">
+        <h3 class="font-weight-bold mb-4 pb-2">Productos relacionados</h3>
+        <p class="grey-text w-responsive mx-auto mb-4">Quienes vieron este producto, tambien vieron:</p>
+
+        <div class="row col-12 col-md-12 px-0 mx-0 mx-auto">
+            <app-product *ngFor="let product of productsRelacionados" [product]="product" class="col-md-3 col-sm-12">
+            </app-product>
+        </div>
+    </section>
+</div>
+
+<app-footer></app-footer>

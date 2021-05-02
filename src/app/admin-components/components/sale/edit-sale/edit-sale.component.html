@@ -1,0 +1,60 @@
+<mat-dialog-content>
+    <div class="alert alert-success" *ngIf="status == 'succes'"> La venta se ha actualizado correctamente. </div>
+    <div class="alert alert-danger" *ngIf="status == 'failed'"> La venta no se ha podido actualizar. </div>
+    <div class="alert alert-warning text-center" *ngIf="status == 'loading'">
+        <div class="spinner-border text-primary text-center" role="status"> <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <h2>Editar venta</h2>
+
+    <div class="card-body" *ngIf="sale">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Comprador</th>
+                    <th scope="col">Whatsapp</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Envio</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row"><a class="text-primary">{{sale.date}}</a></th>
+                    <td>{{sale.nameClient}}</td>
+                    <td>{{sale.phoneClient}}</td>
+                    <td>{{sale.emailClient}}</td>
+                    <td>
+                        <span *ngIf="sale.shipping == 'domicilio'">A domicilio</span>
+                        <span *ngIf="sale.shipping == 'retiro-personal'">Retira por local</span>
+                    </td>
+                    <td>{{sale.status}}</td>
+                    <td>$ {{sale.total | currency: '$'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mx-1 mb-3" *ngIf="sale">
+        <form action="#!" #saleForm="ngForm" (ngSubmit)="onSubmit(saleForm)">
+            <p for="">Estado del pedido: </p>
+            <select name="" id="" class="custom-select" name="status" #status="ngModel" [(ngModel)]="sale.status">
+                <option value="proceso">Proceso</option>
+                <option value="preparado">Preparado</option>
+                <option value="despachado" *ngIf="sale.shipping == 'domicilio'">En camino</option>
+                <option value="entregado">¡Entregado!</option>
+            </select>
+
+            <div class="">
+                <button type="submit" class="btn btn-primary mx-auto my-3 py-3 z-depth-1 rounded btn-rounded col-12"
+                    [disabled]="!saleForm.form.valid">Finalizar compra
+                    <i class="fas fa-angle-right right"></i>
+                </button>
+            </div>
+        </form>
+
+    </div>
+</mat-dialog-content>

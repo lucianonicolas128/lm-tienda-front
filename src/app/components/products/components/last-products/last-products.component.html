@@ -1,0 +1,41 @@
+<!-- Ultimos productos -->
+<div class="container text-center">
+    <div class="feat-products__title text-center">
+        <h1>
+            ÚLTIMOS PRODUCTOS
+        </h1>
+    </div>
+
+    <div class="row col-12 col-md-12 px-0 mx-0 mx-auto">
+        <app-product *ngFor="let product of lastProduct" [product]="product" class="col-md-3 col-sm-12">
+        </app-product>
+    </div>
+
+    <!-- <button class="btn btn-outline-primary mt-4" [routerLink]="['/products']">
+        <i class="fas fa-angle-double-left"></i>
+        VER TODOS LOS PRODUCTOS
+        <i class="fas fa-angle-double-right"></i>
+    </button> -->
+
+    <button class="btn btn-outline-primary mt-4" (click)="getAllProducts()">
+        <i class="fas fa-angle-double-left"></i>
+        VER TODOS LOS PRODUCTOS
+        <i class="fas fa-angle-double-right"></i>
+    </button>
+</div>
+
+<!--
+TAZAS
+JARROS TERMICOS
+EQUIPOS DE MATE
+
+CORTINAS DE BAÑO
+
+INDUMENTARIA
+GORRAS
+
+
+VINILOS DECORATIVOS
+ESMERILADOS
+
+ -->

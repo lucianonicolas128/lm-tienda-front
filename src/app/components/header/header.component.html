@@ -1,62 +1,55 @@
 <header class="section-header bg-white">
-    <nav class="navbar navbar-dark navbar-expand-lg p-2 bg-primary">
-        <div class="container">
-            <button class="navbar-toggler mt-2" type="button" data-toggle="collapse"
-                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
+    <nav class="navbar navbar-felina navbar-dark navbar-expand-lg bg-primary">
+        <div class="container text-center">
+            <button class="navbar-toggler mt-2 col-2" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a class="nav-link" [routerLink]="['/']">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#productos">Productos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Envíos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Medios de pago</a></li>
-                    <li class="nav-item"><a class="nav-link" [routerLink]="['/terminos-y-condiciones']">Términos y condiciones</a></li>
-                </ul>
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a href="https://wa.me/5493436113089" target="_blank" class="nav-link"><i
-                                class="fab fa-whatsapp"></i> +54 343 6113 089 </a>
+            <div class="col-md-2 col-9 mx-auto cuadro-logo">
+                <div class="logo text-center">
+                    <img src="../../../assets/LOGO_LM3.png" routerLink="./inicio">
+                </div>
+            </div>
+            <div class="collapse navbar-collapse col-md-10 mx-auto" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" [routerLink]="['/']">Inicio</a>
                     </li>
-                </ul> <!-- list-inline //  -->
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/products']">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Envíos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Medios de pago</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/terminos-y-condiciones']">Términos y condiciones
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav wasa">
+                    <li class="nav-item">
+                        <a href="https://wa.me/5493436113089" target="_blank" class="nav-link whatsapp">
+                            <i class="fab fa-whatsapp"></i> +54 343 4714 781
+                        </a>
+                    </li>
+                    <li class="nav-item carrito my-auto mx-2">
+                        <a [routerLink]="['/cart']">
+                            <mat-icon class="text-white m-2">shopping_cart</mat-icon>
+                            <!-- [matBadge]="total$ | async" matBadgeColor="accent"  -->
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
-    </nav> <!-- header-top-light.// -->
-
-    <section class="header-main border-bottom">
-        <div class="container">
-            <div class="row align-items-center text-center my-2">
-                <!-- Logo -->
-                <div class="col-md-2 col-6 p-2 mx-auto">
-                    <a [routerLink]="['/']" class="brand-wrap">
-                        <img class="logo" src="../../../assets/LOGO_LM3.png">
-                    </a> <!-- brand-wrap.// -->
-                </div>
-                <!-- Search -->
-                <div class="col-md-8 col-12 col-sm-12 p-2 px-4">
-                    <form action="#" class="search">
-                        <div class="input-group w-100">
-                            <input type="text" class="form-control" placeholder="Search">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form> <!-- search-wrap .end// -->
-                </div> <!-- col.// -->
-                <!-- Cart -->
-                <div class="col-md-2 col-12 p-2">
-                    <div class="widgets-wrap float-md-center">
-                        <div class="widget-header  mr-3">
-                            <a href="#" class="icon icon-sm rounded-circle border" [routerLink]="['/cart']"><i
-                                    class="fa fa-shopping-cart text-primary"></i></a>
-                            <span class="badge badge-pill badge-secondary notify">{{cart}}</span>
-                        </div>
-                    </div> <!-- widgets-wrap.// -->
-                </div> <!-- col.// -->
-            </div> <!-- row.// -->
-        </div> <!-- container.// -->
-    </section> <!-- header-main .// -->
+    </nav>
 </header>
+
+<div id="categorias" class="w-100 bg-secondary categories justify-content-center">
+    <ul class="nav mr-auto justify-content-center">
+        <li class="nav-item" *ngFor="let category of categories">
+            <a class="nav-link text-uppercase" [routerLink]="['/products/' + category.name]">{{category.name}}</a>
+        </li>
+    </ul>
+</div>

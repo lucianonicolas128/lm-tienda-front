@@ -1,0 +1,42 @@
+<mat-grid-list cols="12" rowHeight="35px" class="product--item">
+
+    <mat-grid-tile [colspan]="1" [rowspan]="2">
+        <div class="product--item__image">
+            <img src="{{product.image}}" alt="">
+        </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="7" [rowspan]="1" class="text-left">
+        <div class="product--item__title w-100">
+            <span class="text-left">{{product.name}},</span>
+            <span *ngIf="product.featured"><i class="fas fa-star text-warning mx-1"></i></span>
+            <span *ngIf="!product.featured"><i class="fas fa-star text-gray mx-1"></i></span>
+        </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="4" [rowspan]="2">
+        <div class="product--item__title text-right">
+            <span *ngIf="product.offer">
+                <h6 class="mx-2 text-black-50 product--item__title">{{product.offer | currency: '$'}}</h6>
+                <s><h6 class="mx-2 product--item__title">{{product.price | currency: '$'}}</h6></s>
+            </span>
+            <h6 *ngIf="!product.offer" class="mx-2 product--item__title">{{product.price | currency: '$'}}</h6>
+        </div>
+        <button mat-button (click)="openEditDialog(product._id)"><mat-icon>edit</mat-icon></button>
+        <button mat-button (click)="deleteProduct(product._id)"><mat-icon>delete</mat-icon></button>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="7" [rowspan]="1">
+        <div class="product--item__category row w-100 text-left">
+            <p> {{product.category}}</p>
+            <div>
+                <p class="badge badge-danger mx-1" *ngIf="!product.activated">Desactivado</p>
+                <p class="badge badge-success mx-1" *ngIf="product.activated">Activado</p>
+            </div>
+        </div>
+    </mat-grid-tile>
+
+</mat-grid-list>
+<hr>
+
+<!-- <mat-divider></mat-divider> -->

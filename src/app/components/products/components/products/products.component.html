@@ -1,0 +1,37 @@
+<app-header></app-header>
+
+<section class="section-content mt-5" id="productos">
+    <div class="container">
+        <header class="text-center my-5">
+            <h1 class="">Nuestros productos</h1>
+            <h4 class="text-black-50 text-muted">Productos personalizados, para regalar o regalarte</h4>
+        </header>
+        <!-- sect-heading -->
+        <div class="row ml-4">
+            <div>Filtrar
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                    <mat-icon>filter_alt</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="updateFilter('all')">
+                        <span>Todo</span>
+                    </button>
+                    <button mat-menu-item *ngFor="let category of categories" (click)="updateFilter(category.name)">
+                        <span>{{category.name}}</span>
+                    </button>
+                </mat-menu>
+            </div>
+        </div>
+
+        <!-- Products -->
+        <div class="row col-12 col-md-12 px-0 mx-0 mx-auto" *ngIf="filter == 'all' || filter == null">
+            <app-product *ngFor="let product of products" [product]="product" class="col-md-3 col-sm-12">
+            </app-product>
+        </div>
+
+        <div class="row col-12 col-md-12 px-0 mx-0 mx-auto" *ngIf="filter != 'all'">
+            <app-product *ngFor="let product of productsFiltered" [product]="product" class="col-md-3 col-sm-12">
+            </app-product>
+        </div>
+    </div>
+</section>

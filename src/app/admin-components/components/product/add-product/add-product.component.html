@@ -1,0 +1,116 @@
+<mat-dialog-content class="mat-typography">
+    <div class="container" *ngIf="product">
+        <div class="alert alert-success" *ngIf="status == 'succes'"> El producto se ha agregado correctamente. </div>
+        <div class="alert alert-danger" *ngIf="status == 'failed'"> El producto no se ha podido agregar. </div>
+        <div class="alert alert-warning text-center" *ngIf="status == 'loading'">
+            <div class="spinner-border text-primary text-center" role="status"> <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+
+        <h2>Agregar nuevo producto</h2>
+
+        <form [formGroup]="formProduct" (ngSubmit)="onSubmit(formProduct)">
+            <div class="card p-3">
+                <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image"
+                    placeholder="Subir Imagen" (change)="fileChangeEvent($event)" />
+            </div>
+
+            <div class="row mx-auto mt-2">
+                <div class="col-md-6 col-12">
+                    <mat-form-field class="w-100">
+                        <mat-label>Nombre del producto</mat-label>
+                        <input type="text" matInput formControlName="name">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-5 col-10">
+                    <mat-form-field class="w-100">
+                        <mat-label>Categoria</mat-label>
+                        <mat-select formControlName="category">
+                            <mat-option [value]="'nueva'" class="text-danger">--Nueva categoría--</mat-option>
+                            <mat-option *ngFor="let category of categories" [value]="category.name">{{category.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <mat-icon (click)="getCategories()" class="col-md-1 m-auto">refresh</mat-icon>
+            </div>
+
+            <span *ngIf="categoryField != null && categoryField.value == 'nueva'" class="col-12 card">
+                <h3 class="text-center mt-2">Agregar nueva categoría</h3>
+                <app-add-category></app-add-category>
+            </span>
+
+            <mat-form-field class="w-100">
+                <mat-label>Descripción</mat-label>
+                <textarea matInput type="text" formControlName="description"></textarea>
+            </mat-form-field>
+
+            <!-- Talles & stock -->
+            <h3 class="mb-0">Selecciona los talles de tu tabla de talles</h3>
+            <p class="mt-0 text-black-50">hacer click para seleccionar, cada click aumenta en 1 el stock del talle</p>
+            <div class="form-row p-3 mx-3">
+                <div class="row text-center">
+                    <mat-chip-list>
+                        <mat-chip *ngFor="let talle of tallesAll" (click)="addTalleCheck(talle)">{{talle.talleName}}
+                        </mat-chip>
+                    </mat-chip-list>
+                </div>
+            </div>
+
+            <!-- Mostramos los talles que yá seleccionamos -->
+            <div class="card p-3">
+                <div class="mx-3 text-center">
+                    <h3>Talles seleccionados</h3>
+                    <div class="row">
+                        <mat-chip-list>
+                            <mat-chip *ngFor="let talle of tallesArray, index as i" (click)="removeTalle(i)" class="chip-select">
+                                {{talle.talleName}}</mat-chip>
+                        </mat-chip-list>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card my-4 mx-auto">
+                <div class="row px-3 mx-auto">
+                    <div class="col-md-4 col-12">
+                        <mat-form-field class="w-100">
+                            <mat-label>Costo $</mat-label>
+                            <input matInput type="number" formControlName="cost">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <mat-form-field class="w-100">
+                            <mat-label>Precio $</mat-label>
+                            <input matInput type="number" formControlName="price">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <mat-form-field class="w-100">
+                            <mat-label>El producto está de oferta?</mat-label>
+                            <input matInput type="number" formControlName="offer"
+                                placeholder="Dejar vacio si NO está de oferta">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <div class="custom-control custom-checkbox my-4">
+                <div class="row">
+                    <div class="col">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1"
+                            formControlName="featured">
+                        <label class="custom-control-label" for="customCheck1">Marcar este producto como
+                            destacado</label>
+                    </div>
+                    <div class="col">
+                        <input type="checkbox" class="custom-control-input" id="customCheck2"
+                            formControlName="activated">
+                        <label class="custom-control-label" for="customCheck2">Producto Activado</label>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-info btn-block" type="submit" [disabled]="formProduct.invalid">Cargar
+                producto</button>
+        </form>
+    </div>
+</mat-dialog-content>

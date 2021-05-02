@@ -1,0 +1,38 @@
+<mat-dialog-content class="mat-typography">
+    <div class="container bg-bloque" *ngIf="category">
+
+        <div class="alert alert-success" *ngIf="status == 'succes'">
+            La categoria se ha agregado correctamente.
+        </div>
+        <div class="alert alert-danger" *ngIf="status == 'failed'">
+            La categoria no se ha podido agregar.
+        </div>
+        <div class="alert alert-warning text-center" *ngIf="status == 'loading'">
+            <div class="spinner-border text-primary text-center" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+
+        <form class="text-center p-2" action="#!" [formGroup]="categoryForm" (ngSubmit)="onSubmit(categoryForm)">
+
+            <label for="image">Imagen de la categoría</label>
+            <span class="image" *ngIf="category.image" style="float: none;">
+                <img src="{{category.image}}" *ngIf="category.image" alt="" style="width: 100px;">
+            </span> <br>
+            <input type="file" name="image" placeholder="Subir Imagen" (change)="fileChangeEvent($event)" id="" />
+
+            <mat-form-field class="w-100">
+                <mat-label>Nombre de la categoría</mat-label>
+                <input type="text" matInput formControlName="name">
+            </mat-form-field>
+
+            <progress id="img-uploader-bar" value="" max="100"></progress>
+            <mat-card-actions>
+                <button mat-raised-button class="btn btn-secondary w-100" type="submit"
+                    [disabled]="categoryForm.invalid">Cargar
+                    categoria</button>
+            </mat-card-actions>
+
+        </form>
+    </div>
+</mat-dialog-content>

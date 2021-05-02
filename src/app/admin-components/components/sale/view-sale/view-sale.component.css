@@ -1,0 +1,21 @@
+.tachado {
+    text-decoration: line-through;
+}
+
+.mat-step-icon {
+    background-color: #915c60 !important;
+}
+
+.mat-step-icon-selected {
+    background-color: #915c60 !important;
+}
+
+.mat-step-header .mat-step-icon-selected,
+.mat-step-header .mat-step-icon-state-done,
+.mat-step-header .mat-step-icon-state-edit {
+    background-color: #915c60 !important;
+}
+
+.product--image img {
+    width: 100%;
+}

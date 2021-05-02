@@ -31,7 +31,7 @@ export class ProductService {
 
         return this._http.get(this.url + 'products', { headers: headers });
     }
-    
+
     getProductsCategory(category): Observable<any> {
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
@@ -53,8 +53,7 @@ export class ProductService {
     updateProduct(product): Observable<any> {
         let params = JSON.stringify(product);
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
-
-        return this._http.put(this.url + 'product/' + product._id, params, { headers: headers });
+        return this._http.put(`${this.url}product/${product._id}`, params, { headers: headers });
     }
 
     uploadImageProduct(id): Observable<any> {

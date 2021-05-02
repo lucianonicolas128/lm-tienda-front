@@ -1,0 +1,23 @@
+<div class="body py-2">
+    <div class="container my-5 text-center">
+        <section class="text-center">
+            <h1 class="font-weight-bold mb-4 pb-2"><i class="fas fa-star text-warning mx-1"></i> ¡Los productos más populares! <i class="fas fa-star text-warning mx-1"></i></h1>
+            <p class="grey-text w-responsive mx-auto mb-4">Estos son nuestros productos personalizados más populares</p>
+
+            <div class="row col-12 col-md-12 px-0 mx-0 mx-auto">
+                <app-product *ngFor="let product of productsPopular" [product]="product" class="col-md-3 col-sm-12">
+                </app-product>
+            </div>
+        </section>
+
+        <button class="btn btn-outline-primary mt-4" [routerLink]="['/products']">
+            <i class="fas fa-angle-double-left"></i>
+            VER TODOS LOS PRODUCTOS
+            <i class="fas fa-angle-double-right"></i>
+        </button>
+    </div>
+
+    <!-- <div class="container">
+        <hr>
+    </div> -->
+</div>

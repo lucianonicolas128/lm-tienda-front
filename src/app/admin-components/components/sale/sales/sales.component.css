@@ -1,0 +1,7 @@
+@media (max-width: 768px) {
+    .titulos {
+        height: 0px;
+        width: 0px;
+        visibility: hidden;
+    }
+}
