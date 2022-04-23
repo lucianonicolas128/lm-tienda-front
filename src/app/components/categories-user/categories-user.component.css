@@ -8,7 +8,7 @@
 .category__image {
   cursor: pointer;
   height: 150px;
-  width: auto;
+  width: 150px;
   padding: 0px;
   overflow: hidden;
   object-fit: cover;
@@ -23,8 +23,9 @@
     /* height: 180px; */
     /* object-fit: cover;
     display: block; */
-    height: 80%;
-    width: auto;
+    /* height: 100%; */
+    object-fit: cover;
+    width: 100%;
     margin: 0px;
 }
 

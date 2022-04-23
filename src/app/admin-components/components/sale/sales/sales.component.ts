@@ -26,6 +26,7 @@ export class SalesComponent implements OnInit {
     this._saleService.getSales().subscribe(
       response => {
         if (response.sales) {
+          console.log(response)
           this.sales = response.sales;
         }
       },

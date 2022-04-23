@@ -1,8 +1,8 @@
 <mat-dialog-content class="mat-typography">
     <div *ngIf="sale" class="w-100 container-fluid">
         <h2>{{sale.nameClient}}</h2>
-        <div>
-            <div class="row mx-2">
+        <div class="card p-2">
+            <div class="row">
                 <div class="col-md-3">
                     Telefono: {{sale.phoneClient}}
                 </div>
@@ -29,6 +29,10 @@
                         Entregado
                     </span>
                 </div>
+            </div>
+            <div class="row mt-2" *ngIf="sale?.shipping == 'domicilio'">
+                <div class="col-md-6"><b>Direccion:</b> {{sale.address}}</div>
+                <div class="col-md-6"><b>Tipo de pago:</b> {{sale.pay}}</div>
             </div>
         </div>
         <div class="card p-3 my-1 mt-3">
