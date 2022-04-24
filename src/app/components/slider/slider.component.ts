@@ -33,7 +33,7 @@ export class SliderComponent implements OnInit {
     this._sliderService.getSliders().subscribe(
       response => {
         if(response.sliders){
-          this.sliders = response.sliders;
+          this.sliders = response.sliders.reverse();
         }
       },
       error => {

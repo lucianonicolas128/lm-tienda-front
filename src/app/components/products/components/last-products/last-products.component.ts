@@ -23,6 +23,7 @@ export class LastProductsComponent implements OnInit {
   getProducts() {
     this._productService.getProducts().subscribe(
       response => {
+        console.log(response)
         this.products = response.products;
         this.lastProduct = response.products.slice(0, 8);
       }
